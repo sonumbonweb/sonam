@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress Quest Inspired Site</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background: #0f1117;
+      color: #e6e6e6;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 240px;
+      background: #161a22;
+      height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+      border-right: 1px solid #2a2f3a;
+    }
+
+    .sidebar h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #9aa4ff;
+    }
+
+    .nav-item {
+      margin: 12px 0;
+      cursor: pointer;
+      color: #cfcfcf;
+    }
+
+    .nav-item:hover {
+      color: #ffffff;
+    }
+
+    .content {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .game-box {
+      background: #1c212b;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .log {
+      font-size: 14px;
+      margin-top: 10px;
+      color: #a6ffcb;
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>Menu</h2>
+  <div class="nav-item" onclick="showSection('home')">Home</div>
+  <div class="nav-item" onclick="showSection('about')">About</div>
+  <div class="nav-item" onclick="showSection('projects')">Projects</div>
+  <div class="nav-item" onclick="showSection('bookstack')">Bookstack</div>
+  <div class="nav-item" onclick="showSection('life')">LifeFascinations</div>
+  <div class="nav-item" onclick="showSection('letters')">Letters to My Father</div>
+  <div class="nav-item" onclick="showSection('travel')">Travelogues</div>
+  <div class="nav-item" onclick="showSection('contact')">Contact</div>
+</div>
+
+<div class="content">
+
+  <div id="home" class="section active">
+    <h1>Progress Quest</h1>
+    <div class="game-box">
+      <p>Character: Idle Wanderer</p>
+      <p>Level: <span id="level">1</span></p>
+      <p>XP: <span id="xp">0</span></p>
+      <div class="log" id="log">Starting journey...</div>
+    </div>
+  </div>
+
+  <div id="about" class="section">
+    <h1>About</h1>
+    <p>This is a minimal digital space inspired by idle progression and curiosity.</p>
+  </div>
+
+  <div id="projects" class="section">
+    <h1>Projects</h1>
+    <p>Collection of things built, explored, and experimented with.</p>
+  </div>
+
+  <div id="bookstack" class="section">
+    <h1>Bookstack</h1>
+    <p>Books that shaped thinking.</p>
+  </div>
+
+  <div id="life" class="section">
+    <h1>Life Fascinations</h1>
+    <p>Ideas, curiosities, and obsessions.</p>
+  </div>
+
+  <div id="letters" class="section">
+    <h1>Letters to My Father</h1>
+    <p>Personal reflections written as letters.</p>
+  </div>
+
+  <div id="travel" class="section">
+    <h1>Travelogues</h1>
+    <p>Journeys and places experienced.</p>
+  </div>
+
+  <div id="contact" class="section">
+    <h1>Contact</h1>
+    <p>Email: you@example.com</p>
+  </div>
+
+</div>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  let xp = 0;
+  let level = 1;
+
+  function simulateGame() {
+    xp += Math.floor(Math.random() * 10) + 1;
+
+    if (xp > level * 50) {
+      level++;
+      xp = 0;
+      document.getElementById('log').innerText = 'Level up! Now level ' + level;
+    } else {
+      document.getElementById('log').innerText = 'You gained experience...';
+    }
+
+    document.getElementById('xp').innerText = xp;
+    document.getElementById('level').innerText = level;
+  }
+
+  setInterval(simulateGame, 2000);
+</script>
+
+</body>
+</html>
