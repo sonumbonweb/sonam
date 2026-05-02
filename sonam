@@ -1,160 +1,1382 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Progress Quest Inspired Site</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Progress Quest — A Life in Progress</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap');
+
+    :root {
+      --bg:        #0a0c0e;
+      --panel:     #0f1318;
+      --border:    #2a3a2a;
+      --gold:      #c8a84b;
+      --gold-dim:  #7a6230;
+      --green:     #3ddc84;
+      --green-dim: #1a5c3a;
+      --red:       #d64545;
+      --blue:      #4a9eff;
+      --text:      #b8c8b0;
+      --text-dim:  #5a6a52;
+      --xp-bar:    #2a4a1a;
+      --xp-fill:   #5ada28;
+      --hp-fill:   #da2828;
+      --mp-fill:   #284ada;
+      --sidebar-w: 220px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      margin: 0;
-      font-family: 'Courier New', monospace;
-      background: #0f1117;
-      color: #e6e6e6;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      min-height: 100vh;
       display: flex;
+      overflow: hidden;
+      image-rendering: pixelated;
     }
 
-    .sidebar {
-      width: 240px;
-      background: #161a22;
-      height: 100vh;
-      padding: 20px;
-      box-sizing: border-box;
-      border-right: 1px solid #2a2f3a;
+    /* ── SCANLINE OVERLAY ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,.15) 2px,
+        rgba(0,0,0,.15) 4px
+      );
+      z-index: 9999;
     }
 
-    .sidebar h2 {
-      font-size: 18px;
-      margin-bottom: 20px;
-      color: #9aa4ff;
+    /* ── SIDEBAR ── */
+    #sidebar {
+      width: var(--sidebar-w);
+      min-width: var(--sidebar-w);
+      background: var(--panel);
+      border-right: 2px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .sidebar-header {
+      padding: 14px 12px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .char-name {
+      font-family: 'IM Fell English', serif;
+      font-size: 17px;
+      color: var(--gold);
+      letter-spacing: .04em;
+      text-shadow: 0 0 12px rgba(200,168,75,.5);
+    }
+
+    .char-class {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .char-stats {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      width: 22px;
+      font-size: 10px;
+      color: var(--text-dim);
+      flex-shrink: 0;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 8px;
+      background: #111;
+      border: 1px solid #222;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      transition: width .4s ease;
+      position: relative;
+    }
+
+    .bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: rgba(255,255,255,.25);
+    }
+
+    .hp-bar  { background: var(--hp-fill);  width: 87%; }
+    .mp-bar  { background: var(--mp-fill);  width: 64%; }
+    .xp-bar  { background: var(--xp-fill);  width: 43%; animation: xp-pulse 3s ease-in-out infinite; }
+
+    @keyframes xp-pulse {
+      0%,100% { filter: brightness(1); }
+      50%      { filter: brightness(1.3); }
+    }
+
+    .stat-val { font-size: 10px; color: var(--text-dim); width: 30px; text-align: right; }
+
+    /* ── NAV ── */
+    nav { flex: 1; padding: 8px 0; overflow-y: auto; }
+
+    nav::-webkit-scrollbar { width: 4px; }
+    nav::-webkit-scrollbar-thumb { background: var(--border); }
+
+    .nav-section {
+      font-size: 9px;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      padding: 8px 14px 4px;
     }
 
     .nav-item {
-      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
       cursor: pointer;
-      color: #cfcfcf;
+      color: var(--text-dim);
+      transition: all .15s;
+      position: relative;
+      border-left: 2px solid transparent;
+      user-select: none;
     }
 
     .nav-item:hover {
-      color: #ffffff;
+      background: rgba(61,220,132,.05);
+      color: var(--text);
+      border-left-color: var(--green-dim);
     }
 
-    .content {
+    .nav-item.active {
+      background: rgba(61,220,132,.08);
+      color: var(--green);
+      border-left-color: var(--green);
+    }
+
+    .nav-item.active .nav-icon { filter: drop-shadow(0 0 4px var(--green)); }
+
+    .nav-icon { font-size: 14px; flex-shrink: 0; }
+    .nav-label { font-size: 12px; }
+    .nav-badge {
+      margin-left: auto;
+      font-size: 9px;
+      background: var(--green-dim);
+      color: var(--green);
+      border-radius: 2px;
+      padding: 1px 4px;
+    }
+
+    /* ── QUEST LOG (bottom of sidebar) ── */
+    .quest-log {
+      padding: 10px 12px;
+      border-top: 1px solid var(--border);
+      font-size: 10px;
+      color: var(--text-dim);
+      max-height: 110px;
+      overflow: hidden;
+    }
+
+    .quest-log-title {
+      color: var(--gold-dim);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 4px;
+    }
+
+    .quest-line {
+      padding: 2px 0;
+      opacity: 0;
+      animation: fadeIn .4s forwards;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    /* ── MAIN CONTENT ── */
+    #main {
       flex: 1;
-      padding: 30px;
-      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
 
-    .section {
-      display: none;
+    /* ── TOP BAR ── */
+    .topbar {
+      height: 32px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 14px;
+      flex-shrink: 0;
     }
 
-    .active {
-      display: block;
-    }
-
-    .game-box {
-      background: #1c212b;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-
-    .log {
+    .topbar-title {
+      font-family: 'IM Fell English', serif;
+      color: var(--gold);
       font-size: 14px;
-      margin-top: 10px;
-      color: #a6ffcb;
+      letter-spacing: .05em;
+      text-shadow: 0 0 10px rgba(200,168,75,.4);
     }
+
+    .topbar-sep { color: var(--border); }
+
+    .topbar-breadcrumb { color: var(--text-dim); font-size: 11px; }
+
+    .topbar-right {
+      margin-left: auto;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .blink { animation: blink 1.2s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ── PAGE WRAPPER ── */
+    .page-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      position: relative;
+    }
+
+    .page-content::-webkit-scrollbar { width: 6px; }
+    .page-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── WINDOW PANELS ── */
+    .win {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .win::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    }
+
+    .win-title-bar {
+      background: linear-gradient(90deg, #1a2a1a, #0f1a0f);
+      border-bottom: 1px solid var(--border);
+      padding: 5px 12px;
+      font-size: 11px;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: .05em;
+    }
+
+    .win-dots {
+      display: flex; gap: 4px;
+    }
+
+    .win-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+
+    .d1 { background: #444; }
+    .d2 { background: #444; }
+    .d3 { background: var(--gold-dim); }
+
+    .win-body { padding: 14px 16px; }
+
+    /* ── HOME PAGE: ZERO PLAYER GAME ── */
+    #home-game {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 700px) {
+      #home-game { grid-template-columns: 1fr; }
+    }
+
+    .game-log {
+      font-size: 11px;
+      line-height: 1.7;
+      min-height: 120px;
+      max-height: 180px;
+      overflow-y: auto;
+      color: var(--text);
+    }
+
+    .game-log::-webkit-scrollbar { width: 4px; }
+    .game-log::-webkit-scrollbar-thumb { background: var(--border); }
+
+    .log-entry { margin-bottom: 3px; }
+    .log-ts { color: var(--text-dim); margin-right: 6px; }
+    .log-good  { color: var(--green); }
+    .log-bad   { color: var(--red); }
+    .log-gold  { color: var(--gold); }
+    .log-info  { color: var(--blue); }
+
+    .task-section { margin-top: 10px; }
+
+    .task-label {
+      font-size: 10px;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .task-name {
+      font-size: 12px;
+      color: var(--gold);
+      margin-bottom: 6px;
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+    }
+
+    .progress-track {
+      background: #0a0a0a;
+      border: 1px solid var(--border);
+      height: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--xp-bar), var(--xp-fill));
+      transition: width .3s linear;
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 3px; height: 100%;
+      background: rgba(255,255,255,.5);
+      filter: blur(2px);
+    }
+
+    .progress-text {
+      position: absolute;
+      right: 6px; top: 0; bottom: 0;
+      display: flex; align-items: center;
+      font-size: 9px;
+      color: rgba(255,255,255,.5);
+    }
+
+    .attributes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 14px;
+      font-size: 11px;
+    }
+
+    .attr-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3px 0;
+      border-bottom: 1px solid rgba(42,58,42,.4);
+    }
+
+    .attr-name { color: var(--text-dim); }
+    .attr-val  { color: var(--gold); font-size: 12px; }
+
+    .inventory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .inv-slot {
+      aspect-ratio: 1;
+      background: #0a0a0a;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: default;
+      position: relative;
+      transition: border-color .2s;
+    }
+
+    .inv-slot:hover { border-color: var(--gold-dim); }
+    .inv-slot.empty { opacity: .3; }
+
+    .inv-slot-label {
+      position: absolute;
+      bottom: 2px; right: 3px;
+      font-size: 7px;
+      color: var(--gold-dim);
+    }
+
+    .spells-list { display: flex; flex-direction: column; gap: 6px; }
+
+    .spell-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 8px;
+      background: rgba(0,0,0,.3);
+      border: 1px solid transparent;
+      cursor: default;
+      transition: border-color .2s;
+    }
+
+    .spell-row:hover { border-color: var(--blue); }
+    .spell-icon { font-size: 16px; }
+    .spell-name { flex: 1; color: var(--text); font-size: 11px; }
+    .spell-cost { color: var(--blue); font-size: 10px; }
+
+    /* ── ABOUT ── */
+    .about-hero {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .char-portrait {
+      width: 90px; height: 90px;
+      background: #0a0a0a;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 52px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .char-portrait::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(200,168,75,.1) 0%, transparent 60%);
+    }
+
+    .lore-text {
+      font-family: 'IM Fell English', serif;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    .lore-text em { color: var(--gold); font-style: normal; }
+
+    .level-badge {
+      display: inline-block;
+      background: var(--green-dim);
+      color: var(--green);
+      border: 1px solid var(--green);
+      padding: 2px 8px;
+      font-size: 10px;
+      margin-top: 8px;
+      letter-spacing: .1em;
+    }
+
+    /* ── PROJECTS ── */
+    .project-card {
+      border: 1px solid var(--border);
+      padding: 14px;
+      margin-bottom: 10px;
+      background: #0a0c0a;
+      position: relative;
+      transition: border-color .2s;
+      cursor: pointer;
+    }
+
+    .project-card:hover { border-color: var(--gold-dim); }
+
+    .project-card::before {
+      content: attr(data-status);
+      position: absolute;
+      top: 10px; right: 12px;
+      font-size: 9px;
+      padding: 2px 6px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .project-card[data-status="Active"]::before  { color: var(--green); background: rgba(61,220,132,.1); border: 1px solid var(--green-dim); }
+    .project-card[data-status="Brewing"]::before { color: var(--gold);  background: rgba(200,168,75,.1); border: 1px solid var(--gold-dim); }
+    .project-card[data-status="Done"]::before    { color: var(--text-dim); background: rgba(90,90,90,.1); border: 1px solid #333; }
+
+    .proj-title {
+      font-family: 'IM Fell English', serif;
+      font-size: 15px;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+
+    .proj-desc { font-size: 11px; color: var(--text-dim); line-height: 1.6; max-width: 80%; }
+
+    .proj-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+
+    .tag {
+      font-size: 9px;
+      padding: 2px 6px;
+      border: 1px solid #333;
+      color: #555;
+      letter-spacing: .05em;
+    }
+
+    /* ── BOOKSTACK ── */
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+    }
+
+    .book-card {
+      background: #0a0a0a;
+      border: 1px solid var(--border);
+      padding: 12px;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+
+    .book-card:hover { border-color: var(--gold-dim); }
+
+    .book-spine {
+      width: 100%;
+      height: 8px;
+      margin-bottom: 8px;
+      border-radius: 1px;
+    }
+
+    .book-title {
+      font-family: 'IM Fell English', serif;
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+
+    .book-author { font-size: 10px; color: var(--text-dim); }
+
+    .book-status {
+      margin-top: 6px;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    /* ── BLOG PAGES ── */
+    .post-entry {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+
+    .post-entry:last-child { border-bottom: none; }
+
+    .post-date {
+      font-size: 10px;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+      letter-spacing: .05em;
+    }
+
+    .post-title {
+      font-family: 'IM Fell English', serif;
+      font-size: 17px;
+      color: var(--gold);
+      cursor: pointer;
+      transition: color .2s;
+    }
+
+    .post-title:hover { color: var(--green); }
+
+    .post-excerpt {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    .post-tags { margin-top: 8px; display: flex; gap: 5px; }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: #0a0a0a;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color .2s;
+      text-decoration: none;
+    }
+
+    .contact-item:hover { border-color: var(--gold-dim); }
+    .contact-icon { font-size: 20px; }
+    .contact-label { font-size: 11px; color: var(--text-dim); }
+    .contact-val   { font-size: 12px; color: var(--text); }
+
+    /* ── STATUS BAR ── */
+    .statusbar {
+      height: 22px;
+      background: #07090a;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 20px;
+      font-size: 10px;
+      color: var(--text-dim);
+      flex-shrink: 0;
+    }
+
+    .status-item { display: flex; gap: 5px; align-items: center; }
+    .status-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%,100% { opacity: 1; }
+      50%      { opacity: .3; }
+    }
+
+    /* ── SCROLLABLE TEXT STYLES ── */
+    .prose {
+      font-family: 'IM Fell English', serif;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--text);
+      max-width: 680px;
+    }
+
+    .prose p { margin-bottom: 12px; }
+    .prose em { color: var(--gold); font-style: italic; }
+
+    /* ── HELPER ── */
+    .mt8  { margin-top: 8px; }
+    .mt14 { margin-top: 14px; }
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 16px 0;
+    }
+
+    /* ── TRAVELOGUE ── */
+    .travel-entry {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .travel-coord {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-align: center;
+      padding-top: 4px;
+    }
+
+    .travel-flag { font-size: 28px; text-align: center; }
+
+    .travel-title {
+      font-family: 'IM Fell English', serif;
+      font-size: 16px;
+      color: var(--gold);
+    }
+
+    .travel-meta { font-size: 10px; color: var(--text-dim); margin: 3px 0 6px; }
+    .travel-excerpt { font-size: 12px; color: var(--text-dim); line-height: 1.6; font-style: italic; }
+
+    /* ── LETTER ── */
+    .letter-entry {
+      padding: 14px 18px;
+      border-left: 3px solid var(--gold-dim);
+      margin-bottom: 14px;
+      background: rgba(200,168,75,.03);
+    }
+
+    .letter-num { font-size: 10px; color: var(--gold-dim); letter-spacing: .1em; text-transform: uppercase; }
+
+    .letter-subject {
+      font-family: 'IM Fell English', serif;
+      font-size: 16px;
+      color: var(--gold);
+      margin: 3px 0 6px;
+    }
+
+    .letter-open { font-size: 12px; color: var(--text-dim); line-height: 1.7; font-style: italic; }
+
+    /* ── TOOLTIP ── */
+    [title] { cursor: help; }
+
+    /* ── CORNER DECORATION ── */
+    .corner-deco {
+      position: absolute;
+      width: 12px; height: 12px;
+      border-color: var(--gold-dim);
+      border-style: solid;
+    }
+
+    .corner-deco.tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .corner-deco.tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+    .corner-deco.bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+    .corner-deco.br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
   </style>
 </head>
 <body>
 
-<div class="sidebar">
-  <h2>Menu</h2>
-  <div class="nav-item" onclick="showSection('home')">Home</div>
-  <div class="nav-item" onclick="showSection('about')">About</div>
-  <div class="nav-item" onclick="showSection('projects')">Projects</div>
-  <div class="nav-item" onclick="showSection('bookstack')">Bookstack</div>
-  <div class="nav-item" onclick="showSection('life')">LifeFascinations</div>
-  <div class="nav-item" onclick="showSection('letters')">Letters to My Father</div>
-  <div class="nav-item" onclick="showSection('travel')">Travelogues</div>
-  <div class="nav-item" onclick="showSection('contact')">Contact</div>
-</div>
+<!-- ═══════════════════════ SIDEBAR ═══════════════════════ -->
+<aside id="sidebar">
+  <div class="sidebar-header">
+    <div class="char-name">Adventurer</div>
+    <div class="char-class">Lvl 27 · Curious Wanderer</div>
+  </div>
 
-<div class="content">
-
-  <div id="home" class="section active">
-    <h1>Progress Quest</h1>
-    <div class="game-box">
-      <p>Character: Idle Wanderer</p>
-      <p>Level: <span id="level">1</span></p>
-      <p>XP: <span id="xp">0</span></p>
-      <div class="log" id="log">Starting journey...</div>
+  <div class="char-stats">
+    <div class="stat-bar-row">
+      <span class="stat-label">HP</span>
+      <div class="bar-track"><div class="bar-fill hp-bar"></div></div>
+      <span class="stat-val">174/200</span>
+    </div>
+    <div class="stat-bar-row">
+      <span class="stat-label">MP</span>
+      <div class="bar-track"><div class="bar-fill mp-bar"></div></div>
+      <span class="stat-val">96/150</span>
+    </div>
+    <div class="stat-bar-row">
+      <span class="stat-label">XP</span>
+      <div class="bar-track"><div class="bar-fill xp-bar" id="xp-bar-fill"></div></div>
+      <span class="stat-val" id="xp-text">43%</span>
     </div>
   </div>
 
-  <div id="about" class="section">
-    <h1>About</h1>
-    <p>This is a minimal digital space inspired by idle progression and curiosity.</p>
+  <nav id="nav">
+    <div class="nav-section">Realms</div>
+    <div class="nav-item active" data-page="home">
+      <span class="nav-icon">⚔️</span>
+      <span class="nav-label">Home</span>
+      <span class="nav-badge">LIVE</span>
+    </div>
+    <div class="nav-item" data-page="about">
+      <span class="nav-icon">📜</span>
+      <span class="nav-label">About</span>
+    </div>
+    <div class="nav-item" data-page="projects">
+      <span class="nav-icon">🏗️</span>
+      <span class="nav-label">Projects</span>
+    </div>
+    <div class="nav-item" data-page="bookstack">
+      <span class="nav-icon">📚</span>
+      <span class="nav-label">Bookstack</span>
+    </div>
+    <div class="nav-section">Chronicles</div>
+    <div class="nav-item" data-page="fascinations">
+      <span class="nav-icon">🔮</span>
+      <span class="nav-label">LifeFascinations</span>
+    </div>
+    <div class="nav-item" data-page="letters">
+      <span class="nav-icon">✉️</span>
+      <span class="nav-label">Letters to Father</span>
+    </div>
+    <div class="nav-item" data-page="travelogues">
+      <span class="nav-icon">🗺️</span>
+      <span class="nav-label">Travelogues</span>
+    </div>
+    <div class="nav-section">Guild</div>
+    <div class="nav-item" data-page="contact">
+      <span class="nav-icon">🪬</span>
+      <span class="nav-label">Contact</span>
+    </div>
+  </nav>
+
+  <div class="quest-log">
+    <div class="quest-log-title">Active Quest</div>
+    <div id="quest-lines"></div>
+  </div>
+</aside>
+
+<!-- ═══════════════════════ MAIN ═══════════════════════ -->
+<div id="main">
+  <div class="topbar">
+    <span class="topbar-title">Progress Quest</span>
+    <span class="topbar-sep">›</span>
+    <span class="topbar-breadcrumb" id="breadcrumb">Home</span>
+    <div class="topbar-right">
+      <span id="clock-display">00:00:00</span>
+      <span class="blink">▮</span>
+    </div>
   </div>
 
-  <div id="projects" class="section">
-    <h1>Projects</h1>
-    <p>Collection of things built, explored, and experimented with.</p>
-  </div>
+  <div class="page-content">
 
-  <div id="bookstack" class="section">
-    <h1>Bookstack</h1>
-    <p>Books that shaped thinking.</p>
-  </div>
+    <!-- ══════ HOME ══════ -->
+    <div class="page active" id="page-home">
+      <div id="home-game">
+        <!-- Action Log -->
+        <div class="win">
+          <div class="corner-deco tl"></div><div class="corner-deco tr"></div>
+          <div class="corner-deco bl"></div><div class="corner-deco br"></div>
+          <div class="win-title-bar">
+            <div class="win-dots"><div class="win-dot d1"></div><div class="win-dot d2"></div><div class="win-dot d3"></div></div>
+            ◈ Action Log
+          </div>
+          <div class="win-body">
+            <div class="game-log" id="action-log"></div>
+          </div>
+        </div>
 
-  <div id="life" class="section">
-    <h1>Life Fascinations</h1>
-    <p>Ideas, curiosities, and obsessions.</p>
-  </div>
+        <!-- Character Sheet -->
+        <div class="win">
+          <div class="corner-deco tl"></div><div class="corner-deco tr"></div>
+          <div class="corner-deco bl"></div><div class="corner-deco br"></div>
+          <div class="win-title-bar">
+            <div class="win-dots"><div class="win-dot d1"></div><div class="win-dot d2"></div><div class="win-dot d3"></div></div>
+            ◈ Character Sheet
+          </div>
+          <div class="win-body">
+            <div class="attributes-grid" id="attr-grid"></div>
+          </div>
+        </div>
 
-  <div id="letters" class="section">
-    <h1>Letters to My Father</h1>
-    <p>Personal reflections written as letters.</p>
-  </div>
+        <!-- Current Task -->
+        <div class="win">
+          <div class="corner-deco tl"></div><div class="corner-deco tr"></div>
+          <div class="corner-deco bl"></div><div class="corner-deco br"></div>
+          <div class="win-title-bar">
+            <div class="win-dots"><div class="win-dot d1"></div><div class="win-dot d2"></div><div class="win-dot d3"></div></div>
+            ◈ Current Task
+          </div>
+          <div class="win-body">
+            <div class="task-section">
+              <div class="task-label">Now Performing</div>
+              <div class="task-name" id="task-name">Initializing…</div>
+              <div class="progress-track">
+                <div class="progress-fill" id="task-bar" style="width:0%"></div>
+                <div class="progress-text" id="task-pct">0%</div>
+              </div>
+            </div>
+            <div class="task-section mt14">
+              <div class="task-label">Life XP Progress</div>
+              <div class="progress-track">
+                <div class="progress-fill" id="life-xp-bar" style="width:43%"></div>
+                <div class="progress-text">Lv 27</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <div id="travel" class="section">
-    <h1>Travelogues</h1>
-    <p>Journeys and places experienced.</p>
-  </div>
+        <!-- Inventory -->
+        <div class="win">
+          <div class="corner-deco tl"></div><div class="corner-deco tr"></div>
+          <div class="corner-deco bl"></div><div class="corner-deco br"></div>
+          <div class="win-title-bar">
+            <div class="win-dots"><div class="win-dot d1"></div><div class="win-dot d2"></div><div class="win-dot d3"></div></div>
+            ◈ Equipped & Inventory
+          </div>
+          <div class="win-body">
+            <div class="inventory-grid" id="inventory-grid"></div>
+          </div>
+        </div>
 
-  <div id="contact" class="section">
-    <h1>Contact</h1>
-    <p>Email: you@example.com</p>
-  </div>
+        <!-- Spells -->
+        <div class="win" style="grid-column: 1 / -1;">
+          <div class="corner-deco tl"></div><div class="corner-deco tr"></div>
+          <div class="corner-deco bl"></div><div class="corner-deco br"></div>
+          <div class="win-title-bar">
+            <div class="win-dots"><div class="win-dot d1"></div><div class="win-dot d2"></div><div class="win-dot d3"></div></div>
+            ◈ Known Spells &amp; Skills
+          </div>
+          <div class="win-body">
+            <div class="spells-list" id="spells-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- ══════ ABOUT ══════ -->
+    <div class="page" id="page-about">
+      <div class="win">
+        <div class="corner-deco tl"></div><div class="corner-deco tr"></div>
+        <div class="corner-deco bl"></div><div class="corner-deco br"></div>
+        <div class="win-title-bar">
+          <div class="win-dots"><div class="win-dot d1"></div><div class="win-dot d2"></div><div class="win-dot d3"></div></div>
+          ◈ Character Lore
+        </div>
+        <div class="win-body">
+          <div class="about-hero">
+            <div class="char-portrait">🧙</div>
+            <div>
+              <div class="lore-text">
+                <p>A wanderer of both <em>digital realms</em> and the physical world. Born into a world mid-scroll, curious before cautious.</p>
+                <p>Collects <em>ideas like inventory items</em> — some equipped, some gathering dust, all strangely precious.</p>
+                <p>Believes deeply that a life well-lived is its own kind of <em>zero-player game</em>: systems running, stats climbing, quests completing themselves if you set the conditions right.</p>
+              </div>
+              <div class="level-badge">LVL 27 · CURIOUS WANDERER · CHARISMA +4</div>
+            </div>
+          </div>
+          <hr class="section-divider"/>
+          <div class="attributes-grid" style="max-width:400px">
+            <div class="attr-row"><span class="attr-name">Curiosity</span><span class="attr-val">18</span></div>
+            <div class="attr-row"><span class="attr-name">Patience</span><span class="attr-val">14</span></div>
+            <div class="attr-row"><span class="attr-name">Creativity</span><span class="attr-val">17</span></div>
+            <div class="attr-row"><span class="attr-name">Focus</span><span class="attr-val">12</span></div>
+            <div class="attr-row"><span class="attr-name">Empathy</span><span class="attr-val">16</span></div>
+            <div class="attr-row"><span class="attr-name">Stubbornness</span><span class="attr-val">15</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ PROJECTS ══════ -->
+    <div class="page" id="page-projects">
+      <div class="win">
+        <div class="corner-deco tl"></div><div class="corner-deco tr"></div>
+        <div class="corner-deco bl"></div><div class="corner-deco br"></div>
+        <div class="win-title-bar">
+          <div class="win-dots"><div class="win-dot d1"></div><div class="win-dot d2"></div><div class="win-dot d3"></div></div>
+          ◈ Quest Board — Projects
+        </div>
+        <div class="win-body" id="projects-body">
+          <!-- filled by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ BOOKSTACK ══════ -->
+    <div class="page" id="page-bookstack">
+      <div class="win">
+        <div class="corner-deco tl"></div><div class="corner-deco tr"></div>
+        <div class="corner-deco bl"></div><div class="corner-deco br"></div>
+        <div class="win-title-bar">
+          <div class="win-dots"><div class="win-dot d1"></div><div class="win-dot d2"></div><div class="win-dot d3"></div></div>
+          ◈ Tome Collection — Bookstack
+        </div>
+        <div class="win-body">
+          <div class="book-grid" id="book-grid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ LIFEFASCINATIONS ══════ -->
+    <div class="page" id="page-fascinations">
+      <div class="win">
+        <div class="corner-deco tl"></div><div class="corner-deco tr"></div>
+        <div class="corner-deco bl"></div><div class="corner-deco br"></div>
+        <div class="win-title-bar">
+          <div class="win-dots"><div class="win-dot d1"></div><div class="win-dot d2"></div><div class="win-dot d3"></div></div>
+          ◈ LifeFascinations — Field Notes on Living
+        </div>
+        <div class="win-body" id="fascinations-body"></div>
+      </div>
+    </div>
+
+    <!-- ══════ LETTERS ══════ -->
+    <div class="page" id="page-letters">
+      <div class="win">
+        <div class="corner-deco tl"></div><div class="corner-deco tr"></div>
+        <div class="corner-deco bl"></div><div class="corner-deco br"></div>
+        <div class="win-title-bar">
+          <div class="win-dots"><div class="win-dot d1"></div><div class="win-dot d2"></div><div class="win-dot d3"></div></div>
+          ◈ Letters to My Father
+        </div>
+        <div class="win-body" id="letters-body"></div>
+      </div>
+    </div>
+
+    <!-- ══════ TRAVELOGUES ══════ -->
+    <div class="page" id="page-travelogues">
+      <div class="win">
+        <div class="corner-deco tl"></div><div class="corner-deco tr"></div>
+        <div class="corner-deco bl"></div><div class="corner-deco br"></div>
+        <div class="win-title-bar">
+          <div class="win-dots"><div class="win-dot d1"></div><div class="win-dot d2"></div><div class="win-dot d3"></div></div>
+          ◈ Travelogues — Maps Walked
+        </div>
+        <div class="win-body" id="travelogues-body"></div>
+      </div>
+    </div>
+
+    <!-- ══════ CONTACT ══════ -->
+    <div class="page" id="page-contact">
+      <div class="win">
+        <div class="corner-deco tl"></div><div class="corner-deco tr"></div>
+        <div class="corner-deco bl"></div><div class="corner-deco br"></div>
+        <div class="win-title-bar">
+          <div class="win-dots"><div class="win-dot d1"></div><div class="win-dot d2"></div><div class="win-dot d3"></div></div>
+          ◈ Send a Raven — Contact
+        </div>
+        <div class="win-body">
+          <div class="prose" style="margin-bottom:16px">
+            <p>I read everything. I reply to most things. Send words into the void — they land.</p>
+          </div>
+          <div class="contact-grid">
+            <a class="contact-item" href="mailto:you@example.com">
+              <span class="contact-icon">📧</span>
+              <div><div class="contact-label">Electronic Mail</div><div class="contact-val">you@example.com</div></div>
+            </a>
+            <a class="contact-item" href="https://github.com/" target="_blank">
+              <span class="contact-icon">🐙</span>
+              <div><div class="contact-label">GitHub</div><div class="contact-val">github.com/you</div></div>
+            </a>
+            <a class="contact-item" href="https://twitter.com/" target="_blank">
+              <span class="contact-icon">🐦</span>
+              <div><div class="contact-label">Twitter / X</div><div class="contact-val">@handle</div></div>
+            </a>
+            <a class="contact-item" href="https://linkedin.com/" target="_blank">
+              <span class="contact-icon">💼</span>
+              <div><div class="contact-label">LinkedIn</div><div class="contact-val">linkedin.com/in/you</div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-content -->
+
+  <div class="statusbar">
+    <div class="status-item"><div class="status-dot"></div><span>Online</span></div>
+    <div class="status-item">Realm: <span id="status-page" style="color:var(--text)">Home</span></div>
+    <div class="status-item">Gold: <span style="color:var(--gold)" id="gold-count">0</span></div>
+    <div class="status-item">Kills: <span id="kill-count">0</span></div>
+    <div class="status-item" style="margin-left:auto">v1.0.0</div>
+  </div>
 </div>
 
+<!-- ═══════════════════════ JS ═══════════════════════ -->
 <script>
-  function showSection(id) {
-    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+/* ── DATA ── */
+const ACTIONS = [
+  ["Slaying", ["Field Mouse","Gutter Drake","Mild Goblin","Tax Collector","Rogue Semicolon","Existential Dread","Tuesday","Inbox Zero"]],
+  ["Looting", ["Copper Farthing","Questionable Potion","Tome of Mediocrity","Recipe for Sadness","Map to Nowhere Specific"]],
+  ["Learning", ["Ancient Scroll of CSS","Forbidden API Docs","Art of Not Caring","Secrets of the Nap"]],
+  ["Discovering", ["a shortcut that was longer","that sleep is good actually","an unexpected interest in fungi"]],
+  ["Equipping", ["Hat of Mild Protection","Boots of Standing Around","Cloak of Plausible Deniability"]],
+  ["Completing quest", ["Talk to Someone","Finish a Thing","Start a Thing","Finish a Started Thing","Abandon a Different Thing"]],
+];
+
+const LOG_TYPES = ['log-good','log-bad','log-gold','log-info','log-info'];
+
+const TASKS = [
+  "Writing a blog post that definitely won't take four months",
+  "Optimising code that already worked",
+  "Reading a book about reading more books",
+  "Planning a trip I'll definitely take",
+  "Learning a skill I'll use exactly once",
+  "Staring at a problem until it solves itself",
+  "Drafting an email I'll send tomorrow",
+  "Researching something I already know",
+  "Levelling up patience (passive)",
+  "Grinding curiosity XP",
+];
+
+const ATTRIBUTES = [
+  ["STR","9"],["DEX","13"],["CON","14"],["INT","17"],
+  ["WIS","15"],["CHA","16"],["LCK","11"],["WRD","18"],
+];
+
+const INVENTORY = [
+  {e:"☕",l:"Coffee"},  {e:"📓",l:"Journal"}, {e:"🎧",l:"Earbuds"},
+  {e:"🗺️",l:"Map"},    {e:"🔦",l:"Torch"},   {e:"📷",l:"Camera"},
+  {e:"🧭",l:"Compass"},{e:"📱",l:"Device"},  {e:"",l:""},
+  {e:"",l:""},          {e:"",l:""},          {e:"",l:""},
+];
+
+const SPELLS = [
+  {icon:"✍️", name:"Deep Focus",           cost:"12 MP", desc:"3h uninterrupted work"},
+  {icon:"🔍", name:"Pattern Recognition",  cost:"8 MP",  desc:"See connections others miss"},
+  {icon:"💬", name:"Sincere Conversation",  cost:"5 MP",  desc:"Actually listen"},
+  {icon:"🌙", name:"Night Owl Mode",        cost:"0 MP",  desc:"Passive — always active"},
+  {icon:"📖", name:"Rapid Reading",         cost:"4 MP",  desc:"+50% info absorption"},
+];
+
+const PROJECTS = [
+  {title:"This Website",    status:"Active",  desc:"A personal site that pretends to be an RPG because why not.", tags:["HTML","CSS","JS"]},
+  {title:"Reading Tracker", status:"Active",  desc:"Cataloguing every book read since 2019.",                     tags:["Data","Books"]},
+  {title:"Field Notes App", status:"Brewing", desc:"A minimal app for capturing ideas mid-walk.",                 tags:["Mobile","Ideas"]},
+  {title:"Photo Archive",   status:"Brewing", desc:"10 years of photos, finally organised.",                      tags:["Photography"]},
+  {title:"Short Stories",   status:"Done",    desc:"A collection of micro-fiction written in 2022.",              tags:["Writing","Fiction"]},
+];
+
+const BOOKS = [
+  {title:"The Brothers Karamazov",  author:"Dostoevsky",    color:"#8b3a3a", status:"Reading"},
+  {title:"Ways of Seeing",          author:"Berger",         color:"#3a5a8b", status:"Done"},
+  {title:"BLDGBLOG Book",           author:"Manaugh",        color:"#3a7a4a", status:"Done"},
+  {title:"Debt: First 5000 Years",  author:"Graeber",        color:"#7a5a3a", status:"Reading"},
+  {title:"The Mushroom at End of World",author:"Tsing",      color:"#5a3a7a", status:"Queue"},
+  {title:"Invisible Cities",        author:"Calvino",        color:"#3a7a7a", status:"Done"},
+];
+
+const FASCINATIONS = [
+  {date:"2025·03·14", title:"On the Aesthetics of Maintenance", tags:["infrastructure","beauty"],
+   excerpt:"There is a particular beauty in things that work quietly — the road painted in the night, the server patched at 3am. We celebrate creation; we forget the ten thousand acts of upkeep that make it last."},
+  {date:"2024·11·02", title:"Why I Started Keeping a Weather Log", tags:["attention","daily"],
+   excerpt:"It began as a joke. Now I can tell you the approximate cloud cover for most mornings of the last eighteen months, and it has made me more present than any meditation app."},
+  {date:"2024·07·20", title:"The Completeness Trap", tags:["productivity","letting go"],
+   excerpt:"We wait to share things until they're complete. But completion is a fiction we keep deferring. Most things worth making are worth sharing mid-way."},
+];
+
+const LETTERS = [
+  {num:"Letter I",   subject:"On Learning to Drive Late",
+   open:"Dear Baba, I got my licence at 27, which is apparently late. You got yours at 40. I think we both feared the same thing — not the road, but the independence of it…"},
+  {num:"Letter II",  subject:"The Day I Understood Your Silence",
+   open:"There are conversations we never had. I used to resent the quiet. Now I am sometimes the quiet one, and I understand it differently…"},
+  {num:"Letter III", subject:"What I Took From You Without Knowing",
+   open:"I didn't realise until a friend pointed it out: the way I hold a pen, the tilt of my head when I think. These are yours. I carry them unknowingly, like a useful spell…"},
+];
+
+const TRAVELOGUES = [
+  {flag:"🇮🇳", coord:"12.97°N\n77.59°E", title:"Bengaluru, Slowly", date:"Home Base · Ongoing",
+   excerpt:"A city that is always becoming. I have lived here long enough to mourn what's gone and love what's left. Notes on streets, filter coffee, and the sound of rain on old tiles."},
+  {flag:"🇯🇵", coord:"35.68°N\n139.69°E", title:"Tokyo: Thirty Days of Walking", date:"Feb 2023",
+   excerpt:"I had no plan. I took the wrong train every day on purpose. The city rewarded the mistake consistently."},
+  {flag:"🇵🇹", coord:"38.71°N\n9.14°W",  title:"Lisbon and the Art of the Uphill",date:"Sep 2022",
+   excerpt:"Every street in Lisbon goes up. Every street in Lisbon goes down. There is a philosophy in this. I ate a lot of pastéis and thought about it."},
+];
+
+const QUEST_LINES = [
+  "→ Find something worth writing about",
+  "→ Read one more chapter",
+  "→ Send the email you've been drafting",
+  "→ Go outside. Seriously.",
+];
+
+/* ── GAME STATE ── */
+let taskProgress = 0;
+let taskIndex = 0;
+let kills = 0, gold = 0;
+let xp = 43;
+
+/* ── INIT DOM ── */
+function initHome() {
+  // attributes
+  const ag = document.getElementById('attr-grid');
+  ag.innerHTML = ATTRIBUTES.map(([n,v]) =>
+    `<div class="attr-row"><span class="attr-name">${n}</span><span class="attr-val">${v}</span></div>`
+  ).join('');
+
+  // inventory
+  const ig = document.getElementById('inventory-grid');
+  ig.innerHTML = INVENTORY.map(i =>
+    `<div class="inv-slot${i.e?'':' empty'}" title="${i.l}">${i.e}<span class="inv-slot-label">${i.l}</span></div>`
+  ).join('');
+
+  // spells
+  const sl = document.getElementById('spells-list');
+  sl.innerHTML = SPELLS.map(s =>
+    `<div class="spell-row"><span class="spell-icon">${s.icon}</span><span class="spell-name">${s.name}<br><span style="color:var(--text-dim);font-size:10px">${s.desc}</span></span><span class="spell-cost">${s.cost}</span></div>`
+  ).join('');
+}
+
+function initProjects() {
+  document.getElementById('projects-body').innerHTML =
+    PROJECTS.map(p => `
+      <div class="project-card" data-status="${p.status}">
+        <div class="proj-title">${p.title}</div>
+        <div class="proj-desc">${p.desc}</div>
+        <div class="proj-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      </div>`
+    ).join('');
+}
+
+function initBooks() {
+  const statusColor = {Reading:'var(--green)',Done:'var(--text-dim)',Queue:'var(--gold)'};
+  document.getElementById('book-grid').innerHTML =
+    BOOKS.map(b => `
+      <div class="book-card">
+        <div class="book-spine" style="background:${b.color}"></div>
+        <div class="book-title">${b.title}</div>
+        <div class="book-author">${b.author}</div>
+        <div class="book-status" style="color:${statusColor[b.status]}">${b.status}</div>
+      </div>`
+    ).join('');
+}
+
+function initFascinations() {
+  document.getElementById('fascinations-body').innerHTML =
+    FASCINATIONS.map(p => `
+      <div class="post-entry">
+        <div class="post-date">${p.date}</div>
+        <div class="post-title">${p.title}</div>
+        <div class="post-excerpt">${p.excerpt}</div>
+        <div class="post-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      </div>`
+    ).join('');
+}
+
+function initLetters() {
+  document.getElementById('letters-body').innerHTML =
+    `<div class="prose" style="margin-bottom:14px"><p><em>A series of letters written to my father — some sent, most not. An attempt to cross the distance that silence builds.</em></p></div>` +
+    LETTERS.map(l => `
+      <div class="letter-entry">
+        <div class="letter-num">${l.num}</div>
+        <div class="letter-subject">${l.subject}</div>
+        <div class="letter-open">${l.open}</div>
+      </div>`
+    ).join('');
+}
+
+function initTravelogues() {
+  document.getElementById('travelogues-body').innerHTML =
+    TRAVELOGUES.map(t => `
+      <div class="travel-entry">
+        <div>
+          <div class="travel-flag">${t.flag}</div>
+          <div class="travel-coord">${t.coord}</div>
+        </div>
+        <div>
+          <div class="travel-title">${t.title}</div>
+          <div class="travel-meta">${t.date}</div>
+          <div class="travel-excerpt">${t.excerpt}</div>
+        </div>
+      </div>`
+    ).join('');
+}
+
+/* ── ZERO PLAYER GAME LOOP ── */
+function pick(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
+
+function addLogEntry(text, cls) {
+  const log = document.getElementById('action-log');
+  if (!log) return;
+  const now = new Date();
+  const ts = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  const div = document.createElement('div');
+  div.className = `log-entry ${cls}`;
+  div.innerHTML = `<span class="log-ts">[${ts}]</span>${text}`;
+  log.appendChild(div);
+  while (log.children.length > 40) log.removeChild(log.firstChild);
+  log.scrollTop = log.scrollHeight;
+}
+
+function gameStep() {
+  taskProgress += Math.random() * 12 + 3;
+  if (taskProgress >= 100) {
+    taskProgress = 0;
+    taskIndex = (taskIndex + 1) % TASKS.length;
+    document.getElementById('task-name').textContent = TASKS[taskIndex];
+
+    // trigger an action
+    const [verb, targets] = pick(ACTIONS);
+    const target = pick(targets);
+    const cls = pick(LOG_TYPES);
+    addLogEntry(`${verb} ${target}`, cls);
+
+    if (verb === "Slaying") { kills++; document.getElementById('kill-count').textContent = kills; }
+    if (verb === "Looting") { gold += Math.floor(Math.random()*10)+1; document.getElementById('gold-count').textContent = gold; }
+
+    // xp tick
+    xp = Math.min(99, xp + Math.floor(Math.random()*3)+1);
+    if (xp >= 99) xp = 0;
+    document.getElementById('xp-bar-fill').style.width = xp + '%';
+    document.getElementById('xp-text').textContent = xp + '%';
+    document.getElementById('life-xp-bar').style.width = xp + '%';
   }
 
-  let xp = 0;
-  let level = 1;
+  const pct = Math.round(taskProgress);
+  document.getElementById('task-bar').style.width = pct + '%';
+  document.getElementById('task-pct').textContent = pct + '%';
+}
 
-  function simulateGame() {
-    xp += Math.floor(Math.random() * 10) + 1;
+/* ── CLOCK ── */
+function updateClock() {
+  const n = new Date();
+  document.getElementById('clock-display').textContent =
+    [n.getHours(),n.getMinutes(),n.getSeconds()].map(v=>String(v).padStart(2,'0')).join(':');
+}
 
-    if (xp > level * 50) {
-      level++;
-      xp = 0;
-      document.getElementById('log').innerText = 'Level up! Now level ' + level;
-    } else {
-      document.getElementById('log').innerText = 'You gained experience...';
-    }
+/* ── QUEST LINES ── */
+function populateQuestLines() {
+  const el = document.getElementById('quest-lines');
+  QUEST_LINES.forEach((q,i) => {
+    const d = document.createElement('div');
+    d.className = 'quest-line';
+    d.style.animationDelay = (i*0.3)+'s';
+    d.textContent = q;
+    el.appendChild(d);
+  });
+}
 
-    document.getElementById('xp').innerText = xp;
-    document.getElementById('level').innerText = level;
-  }
+/* ── NAV ── */
+const NAV_LABELS = {
+  home:'Home', about:'About', projects:'Projects', bookstack:'Bookstack',
+  fascinations:'LifeFascinations', letters:'Letters to Father', travelogues:'Travelogues', contact:'Contact'
+};
 
-  setInterval(simulateGame, 2000);
+function navigate(page) {
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.page === page));
+  document.querySelectorAll('.page').forEach(el => el.classList.toggle('active', el.id === 'page-'+page));
+  document.getElementById('breadcrumb').textContent = NAV_LABELS[page];
+  document.getElementById('status-page').textContent = NAV_LABELS[page];
+}
+
+document.querySelectorAll('.nav-item').forEach(el => {
+  el.addEventListener('click', () => navigate(el.dataset.page));
+});
+
+/* ── BOOT ── */
+initHome();
+initProjects();
+initBooks();
+initFascinations();
+initLetters();
+initTravelogues();
+populateQuestLines();
+
+// first log entries
+setTimeout(()=>addLogEntry('Character loaded. Adventure resumed.','log-good'), 400);
+setTimeout(()=>addLogEntry('All systems nominal.','log-info'), 900);
+setTimeout(()=>addLogEntry('Passive skills active.','log-info'), 1400);
+
+document.getElementById('task-name').textContent = TASKS[0];
+
+setInterval(gameStep, 1200);
+setInterval(updateClock, 1000);
+updateClock();
 </script>
-
 </body>
 </html>
