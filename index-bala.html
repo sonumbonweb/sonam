@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sonam Bala</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ── reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:      #111111;
+  --white:      #ffffff;
+  --green:      #2D6A4F;
+  --green-soft: #3a7d5c;
+  --grey-light: #f5f5f3;
+  --grey-mid:   #e2e2df;
+  --grey-text:  #888;
+  --sidebar-w:  200px;
+}
+
+html, body {
+  height: 100%;
+  font-family: Georgia, 'EB Garamond', serif;
+  background: var(--white);
+  color: var(--black);
+  font-size: 16px;
+}
+
+/* ── layout ── */
+#wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── sidebar ── */
+#sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  border-right: 1px solid var(--grey-mid);
+  display: flex;
+  flex-direction: column;
+  padding: 2.75rem 1.5rem 2rem;
+  position: fixed;
+  top: 0; left: 0;
+  background: var(--white);
+  z-index: 100;
+}
+
+#sb-name {
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: 0.01em;
+  color: var(--black);
+  line-height: 1.3;
+  margin-bottom: 2.5rem;
+}
+
+#sb-name span {
+  display: block;
+  font-weight: normal;
+  font-style: italic;
+  font-size: 11px;
+  color: var(--grey-text);
+  margin-top: 3px;
+  letter-spacing: 0.05em;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+nav a {
+  font-family: Georgia, serif;
+  font-size: 14px;
+  color: var(--grey-text);
+  text-decoration: none;
+  padding: 6px 0;
+  transition: color 0.15s;
+  border-bottom: none;
+  letter-spacing: 0.01em;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--black);
+}
+
+nav a.active {
+  color: var(--green);
+}
+
+#sb-foot {
+  margin-top: auto;
+  font-size: 11px;
+  font-style: italic;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+/* ── main ── */
+#main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+}
+
+/* ── pages ── */
+.page {
+  display: none;
+  padding: 3rem 3rem 5rem;
+  max-width: 760px;
+  animation: pagein 0.25s ease;
+}
+
+.page.active { display: block; }
+
+@keyframes pagein {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── page headings ── */
+.page-title {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--grey-text);
+  margin-bottom: 2.5rem;
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* ── HOME ── */
+#page-home { max-width: 600px; }
+
+#home-game-wrap {
+  margin-top: 0.5rem;
+}
+
+/* ── ABOUT ── */
+.about-body {
+  font-size: 16px;
+  line-height: 1.85;
+  color: #222;
+  max-width: 520px;
+}
+
+.about-body p { margin-bottom: 1.25rem; }
+
+.about-body a {
+  color: var(--green);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(45,106,79,0.35);
+  transition: border-color 0.15s;
+}
+
+.about-body a:hover { border-color: var(--green); }
+
+/* ── PROJECTS ── */
+.proj-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 540px;
+}
+
+.proj-item {
+  border-bottom: 1px solid var(--grey-mid);
+  padding-bottom: 1.75rem;
+}
+
+.proj-item:last-child { border-bottom: none; }
+
+.proj-title {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--black);
+  margin-bottom: 5px;
+}
+
+.proj-tag {
+  display: inline-block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+
+.proj-desc {
+  font-size: 14px;
+  font-style: italic;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* ── BOOKSTACK ── */
+.books-intro {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--grey-text);
+  margin-bottom: 2rem;
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+.book-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 520px;
+}
+
+.book-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--grey-mid);
+}
+
+.book-item:last-child { border-bottom: none; }
+
+.book-title {
+  font-size: 15px;
+  color: var(--black);
+  flex: 1;
+}
+
+.book-author {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--grey-text);
+  white-space: nowrap;
+}
+
+.book-status {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--green);
+  white-space: nowrap;
+}
+
+/* ── TRAVELOGUES ── */
+.travel-intro {
+  font-size: 15px;
+  font-style: italic;
+  color: var(--grey-text);
+  line-height: 1.7;
+  max-width: 480px;
+  margin-bottom: 2.5rem;
+}
+
+.travel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 520px;
+}
+
+.travel-item {
+  border-bottom: 1px solid var(--grey-mid);
+  padding-bottom: 1.5rem;
+}
+
+.travel-item:last-child { border-bottom: none; }
+
+.travel-place {
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.travel-date {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--grey-text);
+  margin-bottom: 8px;
+}
+
+.travel-note {
+  font-size: 14px;
+  font-style: italic;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* ── CONTACT ── */
+.contact-body {
+  max-width: 420px;
+}
+
+.contact-intro {
+  font-size: 16px;
+  font-style: italic;
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.contact-icon {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--grey-mid);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--black);
+}
+
+.contact-link {
+  font-size: 14px;
+  color: var(--black);
+  text-decoration: none;
+  border-bottom: 1px solid var(--grey-mid);
+  padding-bottom: 1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.contact-link:hover {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+/* ═══════════════════════════════════════
+   STUMBLE GAME (embedded)
+═══════════════════════════════════════ */
+#st {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 0 2rem;
+}
+
+#st-head { text-align: center; margin-bottom: 2rem; }
+
+#st-title {
+  font-size: 38px;
+  font-weight: 400;
+  letter-spacing: -1px;
+  color: var(--black);
+  line-height: 1;
+  font-family: Georgia, serif;
+}
+
+#st-sub {
+  font-size: 13px;
+  color: var(--grey-text);
+  margin-top: 7px;
+  font-style: italic;
+}
+
+#st-pills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.st-pill {
+  font-family: Georgia, serif;
+  font-size: 11px;
+  padding: 3px 11px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  color: #555;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.st-pill.tag {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+#st-hint-row {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  min-height: 32px;
+}
+
+#st-hint-btn {
+  font-family: Georgia, serif;
+  font-size: 13px;
+  font-style: italic;
+  color: #bbb;
+  background: none;
+  border: none;
+  border-bottom: 1px dashed #ddd;
+  cursor: pointer;
+  padding: 2px 0;
+  transition: color .15s, border-color .15s;
+}
+#st-hint-btn:hover { color: #777; border-color: #aaa; }
+
+#st-hint-text {
+  font-size: 14px;
+  font-style: italic;
+  color: #666;
+  line-height: 1.55;
+  display: none;
+  animation: fadein .3s ease;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(-3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#st-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 1.25rem;
+  align-items: center;
+}
+
+.st-row { display: flex; gap: 6px; }
+
+.st-cell {
+  width: 52px;
+  height: 52px;
+  border: 1.5px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  font-weight: 500;
+  color: var(--black);
+  background: var(--white);
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: background .13s, color .13s, border-color .13s;
+  font-family: Georgia, serif;
+}
+
+.st-cell.filled  { border-color: #888; }
+.st-cell.active  { border-color: var(--black); }
+.st-cell.correct { background: var(--green); color: #fff; border-color: var(--green); }
+.st-cell.present { background: #888; color: #fff; border-color: #888; }
+.st-cell.absent  { background: #eee; color: #999; border-color: #eee; }
+
+#st-msg {
+  text-align: center;
+  font-style: italic;
+  font-size: 14px;
+  color: #aaa;
+  min-height: 20px;
+  margin-bottom: 1rem;
+  font-family: Georgia, serif;
+}
+#st-msg.err { color: #8B1A1A; }
+#st-msg.win { color: var(--green); }
+
+#st-kb {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+
+.st-kb-row { display: flex; gap: 4px; }
+
+.st-key {
+  height: 42px;
+  min-width: 34px;
+  padding: 0 5px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  background: #f7f7f7;
+  color: var(--black);
+  font-family: Georgia, serif;
+  font-size: 14px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background .12s, color .12s;
+}
+
+.st-key:active { transform: scale(.96); }
+.st-key.wide   { min-width: 52px; font-size: 11px; letter-spacing: .03em; }
+.st-key.correct { background: var(--green); color: #fff; border-color: var(--green); }
+.st-key.present { background: #888; color: #fff; border-color: #888; }
+.st-key.absent  { background: #e0e0e0; color: #bbb; border-color: #e0e0e0; }
+
+#st-reveal {
+  display: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  animation: fadein .35s ease;
+}
+
+#st-reveal.show { display: block; }
+
+#st-reveal-header {
+  padding: 12px 18px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+#st-reveal-word {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--black);
+  text-transform: capitalize;
+  font-family: Georgia, serif;
+}
+
+#st-reveal-typetag {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #bbb;
+}
+
+#st-reveal-body { padding: 16px 18px; }
+
+#st-reveal-text {
+  font-size: 15px;
+  font-style: italic;
+  color: #222;
+  line-height: 1.75;
+  margin-bottom: 10px;
+  font-family: Georgia, serif;
+}
+
+#st-reveal-attr {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 14px;
+}
+
+#st-reveal-link {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--green);
+  text-decoration: none;
+  border-bottom: 1px solid var(--green);
+  padding-bottom: 1px;
+}
+
+#st-reveal-link:hover { opacity: .75; }
+
+#st-actions { text-align: center; margin-top: .5rem; }
+
+#st-next {
+  font-family: Georgia, serif;
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border: 1px solid var(--black);
+  background: var(--white);
+  cursor: pointer;
+  display: none;
+  border-radius: 2px;
+  transition: background .15s, color .15s;
+}
+
+#st-next:hover { background: var(--black); color: var(--white); }
+
+#st-score {
+  text-align: center;
+  font-style: italic;
+  font-size: 12px;
+  color: #ccc;
+  margin-top: 1.5rem;
+  font-family: Georgia, serif;
+}
+
+#st-loading {
+  text-align: center;
+  font-style: italic;
+  color: #bbb;
+  font-size: 14px;
+  padding: 2.5rem 0;
+  font-family: Georgia, serif;
+}
+
+#st-error {
+  text-align: center;
+  color: #8B1A1A;
+  font-size: 13px;
+  font-style: italic;
+  display: none;
+  padding: .5rem 0;
+}
+
+/* ── mobile ── */
+@media (max-width: 640px) {
+  #sidebar {
+    width: 100%;
+    min-height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid var(--grey-mid);
+    padding: 1.5rem 1.25rem 1rem;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  #wrapper { flex-direction: column; }
+  #main { margin-left: 0; }
+
+  #sb-name { margin-bottom: 0; font-size: 15px; }
+  #sb-foot { display: none; }
+
+  nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2px 16px;
+  }
+
+  .page { padding: 1.75rem 1.25rem 3rem; }
+}
+
+</style>
+</head>
+<body>
+
+<div id="wrapper">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside id="sidebar">
+    <div id="sb-name">
+      SONAM BALA
+    </div>
+
+    <nav>
+      <a href="#" class="active" data-page="home"        onclick="nav(this)">Home</a>
+      <a href="#" data-page="about"       onclick="nav(this)">About</a>
+      <a href="#" data-page="projects"    onclick="nav(this)">Projects</a>
+      <a href="#" data-page="bookstack"   onclick="nav(this)">Bookstack</a>
+      <a href="#" data-page="travelogues" onclick="nav(this)">Travelogues</a>
+      <a href="#" data-page="contact"     onclick="nav(this)">Contact</a>
+    </nav>
+
+    <div id="sb-foot">
+      &copy; <span id="yr"></span>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN ═══ -->
+  <main id="main">
+
+    <!-- HOME -->
+    <section class="page active" id="page-home">
+      <div id="home-game-wrap">
+        <div id="st">
+          <div id="st-head">
+            <div id="st-title">Stumble</div>
+            <div id="st-sub">guess the word to enter the rabbit hole</div>
+          </div>
+
+          <div id="st-loading">fetching the repository…</div>
+          <div id="st-error">could not reach the repository. using built-in entries.</div>
+
+          <div id="st-game" style="display:none;">
+            <div id="st-pills">
+              <span class="st-pill" id="p-len">? letters</span>
+              <span class="st-pill" id="p-try">? chances</span>
+              <span class="st-pill tag" id="p-tag">?</span>
+            </div>
+
+            <div id="st-hint-row">
+              <button id="st-hint-btn" onclick="revealHint()">show hint</button>
+              <div id="st-hint-text"></div>
+            </div>
+
+            <div id="st-grid"></div>
+            <div id="st-msg">start typing</div>
+
+            <div id="st-kb">
+              <div class="st-kb-row" id="kb0"></div>
+              <div class="st-kb-row" id="kb1"></div>
+              <div class="st-kb-row" id="kb2"></div>
+            </div>
+
+            <div id="st-reveal">
+              <div id="st-reveal-header">
+                <span id="st-reveal-word"></span>
+                <span id="st-reveal-typetag"></span>
+              </div>
+              <div id="st-reveal-body">
+                <div id="st-reveal-text"></div>
+                <div id="st-reveal-attr"></div>
+                <a id="st-reveal-link" href="#" target="_blank" rel="noopener"></a>
+              </div>
+            </div>
+
+            <div id="st-actions">
+              <button id="st-next" onclick="startGame()">next word →</button>
+            </div>
+
+            <div id="st-score"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="page" id="page-about">
+      <div class="page-title">About</div>
+      <div class="about-body">
+        <p>Hello. I'm Sonam Bala.</p>
+        <p>This space is where I think out loud — through projects, books, places, and the occasional obsession I can't stop reading about.</p>
+        <p>I believe in the slow accumulation of things worth knowing. The rabbit holes, the half-finished sentences, the ideas that take years to resolve. This site is a record of those.</p>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="page" id="page-projects">
+      <div class="page-title">Projects</div>
+      <div class="proj-list">
+        <div class="proj-item">
+          <div class="proj-tag">—</div>
+          <div class="proj-title">Projects coming soon</div>
+          <div class="proj-desc">This section is being assembled. Check back.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKSTACK -->
+    <section class="page" id="page-bookstack">
+      <div class="page-title">Bookstack</div>
+      <p class="books-intro">A running record of what's been read, what's being read, and what's waiting on the shelf.</p>
+      <div class="book-list">
+        <div class="book-item">
+          <span class="book-title">The Emperor of All Maladies</span>
+          <span class="book-author">Siddhartha Mukherjee</span>
+          <span class="book-status">read</span>
+        </div>
+        <div class="book-item">
+          <span class="book-title">Invisible Cities</span>
+          <span class="book-author">Italo Calvino</span>
+          <span class="book-status">read</span>
+        </div>
+        <div class="book-item">
+          <span class="book-title">The Periodic Table</span>
+          <span class="book-author">Primo Levi</span>
+          <span class="book-status">reading</span>
+        </div>
+        <div class="book-item">
+          <span class="book-title">Pachinko</span>
+          <span class="book-author">Min Jin Lee</span>
+          <span class="book-status">queue</span>
+        </div>
+        <div class="book-item">
+          <span class="book-title">Thinking, Fast and Slow</span>
+          <span class="book-author">Daniel Kahneman</span>
+          <span class="book-status">read</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAVELOGUES -->
+    <section class="page" id="page-travelogues">
+      <div class="page-title">Travelogues</div>
+      <p class="travel-intro">Notes from places. Not guides — just impressions, overheard conversations, the quality of light.</p>
+      <div class="travel-list">
+        <div class="travel-item">
+          <div class="travel-place">—</div>
+          <div class="travel-date">Coming soon</div>
+          <div class="travel-note">Entries are being written. Some places take time to put into words.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="page" id="page-contact">
+      <div class="page-title">Contact</div>
+      <div class="contact-body">
+        <p class="contact-intro">The best way to reach me is by email. I'm also on LinkedIn if that's easier.</p>
+        <div class="contact-list">
+
+          <!-- Email -->
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </div>
+            <a class="contact-link" href="mailto:mailsonamb@gmail.com">mailsonamb@gmail.com</a>
+          </div>
+
+          <!-- LinkedIn -->
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/>
+              </svg>
+            </div>
+            <a class="contact-link" href="https://linkedin.com/in/sonam-bala" target="_blank" rel="noopener">linkedin.com/in/sonam-bala</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+// ── year ──
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// ── nav ──
+function nav(el) {
+  event.preventDefault();
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('page-' + el.dataset.page).classList.add('active');
+}
+
+// ═══════════════════════════════════════
+//  STUMBLE GAME
+// ═══════════════════════════════════════
+const GITHUB_RAW = 'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/words.json';
+
+const FALLBACK = [
+  { word:"AARON",    tag:"person",     type:"biography",   hint:"A programmer who believed information should be free.",                                          reveal:"Aaron Swartz was a prodigy who co-authored RSS at 14, helped build Creative Commons, and later faced federal prosecution for downloading academic articles — a case that became a flashpoint for debates about internet freedom and the law.", attr:"Aaron Swartz (1986–2013)", link:"https://en.wikipedia.org/wiki/Aaron_Swartz", linkLabel:"read his Wikipedia article" },
+  { word:"GAME",     tag:"concept",    type:"rabbit hole", hint:"Four rules. Infinite universes. Zero players.",                                                  reveal:"The Game of Life isn't a board game — it's a zero-player mathematical universe invented by John Conway in 1970. Four simple rules applied to a grid of cells produce spaceships, oscillators, and self-replicating patterns of infinite complexity.", attr:"Conway's Game of Life", link:"https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life", linkLabel:"enter the game of life" },
+  { word:"MALGUDI",  tag:"literature", type:"excerpt",     hint:"A fictional South Indian town that felt more real than most real places.",                       reveal:"Malgudi was a whole world. It had its own railway station, its own river, its own eccentric population. R.K. Narayan never put it on a map, and that was the point — it existed more completely in the imagination than any real place could.", attr:"on Malgudi Days — R.K. Narayan", link:"https://en.wikipedia.org/wiki/Malgudi_Days", linkLabel:"explore Malgudi Days" },
+  { word:"BABEL",    tag:"myth",       type:"rabbit hole", hint:"A tower that explained why we can't understand each other.",                                      reveal:"The Tower of Babel story draws from a Sumerian myth describing a golden age when all people spoke one tongue — and the gods grew nervous. Modern linguists count roughly 7,000 languages spoken today.", attr:"Genesis 11 / Sumerian mythology", link:"https://en.wikipedia.org/wiki/Tower_of_Babel", linkLabel:"read about Babel" },
+  { word:"KAFKA",    tag:"writer",     type:"biography",   hint:"He asked for everything he wrote to be burned. It wasn't.",                                      reveal:"Franz Kafka published almost nothing in his lifetime and asked his friend Max Brod to burn every manuscript when he died. Brod didn't. The word Kafkaesque — meaning absurd, labyrinthine, and bureaucratically nightmarish — entered dictionaries before most people had read a word he wrote.", attr:"Franz Kafka (1883–1924)", link:"https://en.wikipedia.org/wiki/Franz_Kafka", linkLabel:"read about Kafka" },
+  { word:"LETHE",    tag:"mythology",  type:"rabbit hole", hint:"A river in the underworld. Drinking from it made you forget everything.",                        reveal:"In Greek mythology, the dead drank from the Lethe — the river of forgetting — before reincarnation, so they wouldn't remember their past lives. Its opposite, the Mnemosyne, offered full memory. Only a few heroes chose to drink from Mnemosyne.", attr:"Greek underworld mythology", link:"https://en.wikipedia.org/wiki/Lethe", linkLabel:"explore the Greek underworld" },
+  { word:"SAGAN",    tag:"person",     type:"excerpt",     hint:"He made billions and billions feel intimate.",                                                   reveal:"The cosmos is within us. We are made of star-stuff. We are a way for the universe to know itself. Carl Sagan wrote this in Cosmos, a book that sold more copies than any English-language science book in history at the time.", attr:"Carl Sagan, Cosmos (1980)", link:"https://en.wikipedia.org/wiki/Carl_Sagan", linkLabel:"read about Carl Sagan" },
+  { word:"BORGES",   tag:"literature", type:"excerpt",     hint:"He wrote a library that contained every book ever written — and every book ever possible.",      reveal:"Borges imagined a Library of Babel containing every possible book — including the true story of your death, the refutation of every false theory, and endless volumes of meaningless letters. The library is infinite, and most of it is gibberish.", attr:"Jorge Luis Borges, The Library of Babel (1941)", link:"https://en.wikipedia.org/wiki/The_Library_of_Babel", linkLabel:"enter the Library of Babel" },
+  { word:"TRIAGE",   tag:"medicine",   type:"fact",        hint:"Napoleon's surgeon invented a system that treated enemies before officers.",                      reveal:"The word triage comes from the French trier — to sort. It was formalized by Napoleon's surgeon Dominique Larrey, who devised a system to treat soldiers by urgency rather than rank. He reportedly treated enemy soldiers before French officers if their wounds were more critical.", attr:"History of triage — Dominique Larrey", link:"https://en.wikipedia.org/wiki/Triage", linkLabel:"read about triage" },
+  { word:"ATLAS",    tag:"myth",       type:"rabbit hole", hint:"He held up the sky, not the Earth — and ended up on every map.",                                 reveal:"Atlas was condemned to hold up the heavens — not the Earth, as commonly depicted. The first collection of maps bound together was called an atlas by Gerardus Mercator in 1595, because he put a picture of the Titan on the cover.", attr:"Atlas — Greek mythology and cartography", link:"https://en.wikipedia.org/wiki/Atlas_(mythology)", linkLabel:"read about Atlas" },
+  { word:"SERENDIP", tag:"etymology",  type:"rabbit hole", hint:"The old name for Sri Lanka quietly gave us one of the most beautiful words in English.",         reveal:"The word serendipity was coined in 1754 by Horace Walpole, inspired by a Persian fairy tale about three princes of Serendip — the old Arabic name for Sri Lanka — who made discoveries by accident and sagacity. The tale is one of the earliest detective stories ever written.", attr:"Etymology of serendipity", link:"https://en.wikipedia.org/wiki/Serendipity", linkLabel:"read about serendipity" },
+  { word:"PILOT",    tag:"aviation",   type:"fact",        hint:"The hands-off moment happened nine years after Kitty Hawk.",                                     reveal:"The word autopilot is older than you think — the first automatic flight control system was fitted to a Curtiss flying boat in 1912, just nine years after Kitty Hawk. The pilot literally tied the controls and walked away.", attr:"Wikipedia: Autopilot history", link:"https://en.wikipedia.org/wiki/Autopilot", linkLabel:"read about autopilot" }
+];
+
+const KB = [
+  ['Q','W','E','R','T','Y','U','I','O','P'],
+  ['A','S','D','F','G','H','J','K','L'],
+  ['ENTER','Z','X','C','V','B','N','M','⌫']
+];
+
+let WORDS = [], secret, entry, maxRows, stRow, stCol, board, keys, over;
+let played = 0, won = 0, used = [];
+
+async function loadWords() {
+  try {
+    const r = await fetch(GITHUB_RAW, { cache: 'no-cache' });
+    if (!r.ok) throw new Error();
+    WORDS = await r.json();
+  } catch (e) {
+    WORDS = FALLBACK;
+    const err = document.getElementById('st-error');
+    err.style.display = 'block';
+    setTimeout(() => err.style.display = 'none', 4000);
+  }
+  document.getElementById('st-loading').style.display = 'none';
+  document.getElementById('st-game').style.display = 'block';
+  startGame();
+}
+
+function pick() {
+  if (used.length >= WORDS.length) used = [];
+  let i;
+  do { i = Math.floor(Math.random() * WORDS.length); } while (used.includes(i));
+  used.push(i);
+  return WORDS[i];
+}
+
+function startGame() {
+  entry   = pick();
+  secret  = entry.word.toUpperCase();
+  maxRows = secret.length + 1;
+  stRow = 0; stCol = 0;
+  board = Array.from({ length: maxRows }, () => Array(secret.length).fill(''));
+  keys  = {};
+  over  = false;
+
+  document.getElementById('p-len').textContent = secret.length + ' letters';
+  document.getElementById('p-try').textContent = maxRows + ' chances';
+  document.getElementById('p-tag').textContent = entry.tag;
+
+  const hbtn = document.getElementById('st-hint-btn');
+  const htxt = document.getElementById('st-hint-text');
+  hbtn.style.display = 'inline-block';
+  htxt.style.display = 'none';
+  htxt.textContent   = '';
+
+  document.getElementById('st-reveal').classList.remove('show');
+  document.getElementById('st-next').style.display = 'none';
+  setMsg('start typing', '');
+  buildGrid();
+  buildKB();
+  updateScore();
+}
+
+function revealHint() {
+  document.getElementById('st-hint-btn').style.display = 'none';
+  const htxt = document.getElementById('st-hint-text');
+  htxt.textContent   = entry.hint || 'no hint available for this one.';
+  htxt.style.display = 'block';
+}
+
+function buildGrid() {
+  const g = document.getElementById('st-grid');
+  g.innerHTML = '';
+  for (let r = 0; r < maxRows; r++) {
+    const rw = document.createElement('div');
+    rw.className = 'st-row';
+    for (let c = 0; c < secret.length; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'st-cell' + (r === 0 ? ' active' : '');
+      cell.id = `s-${r}-${c}`;
+      rw.appendChild(cell);
+    }
+    g.appendChild(rw);
+  }
+}
+
+function setCell(r, c, letter, state) {
+  const el = document.getElementById(`s-${r}-${c}`);
+  if (!el) return;
+  el.textContent = letter;
+  let cls = 'st-cell';
+  if (state)           cls += ' ' + state;
+  else if (letter)     cls += ' filled';
+  else if (r === stRow) cls += ' active';
+  el.className = cls;
+}
+
+function buildKB() {
+  KB.forEach((ks, ri) => {
+    const rw = document.getElementById(`kb${ri}`);
+    rw.innerHTML = '';
+    ks.forEach(k => {
+      const b = document.createElement('button');
+      b.className = 'st-key' + (k.length > 1 ? ' wide' : '');
+      b.textContent = k;
+      if (keys[k]) b.classList.add(keys[k]);
+      b.onclick = () => handle(k);
+      rw.appendChild(b);
+    });
+  });
+}
+
+function handle(k) {
+  if (over) return;
+  const W = secret.length;
+  if (k === '⌫' || k === 'BACKSPACE') {
+    if (stCol > 0) { stCol--; board[stRow][stCol] = ''; setCell(stRow, stCol, '', ''); }
+    setMsg('', '');
+  } else if (k === 'ENTER') {
+    submit();
+  } else if (/^[A-Z]$/.test(k) && stCol < W) {
+    board[stRow][stCol] = k;
+    setCell(stRow, stCol, k, '');
+    stCol++;
+    setMsg('', '');
+  }
+}
+
+document.addEventListener('keydown', e => {
+  // only handle keys when home page is active
+  if (!document.getElementById('page-home').classList.contains('active')) return;
+  if (e.metaKey || e.ctrlKey) return;
+  const k = e.key.toUpperCase();
+  if      (k === 'BACKSPACE') handle('⌫');
+  else if (k === 'ENTER')     handle('ENTER');
+  else if (/^[A-Z]$/.test(k)) handle(k);
+});
+
+function scoreGuess(guess, ans) {
+  const W = ans.length, res = Array(W).fill('absent'), cnt = {};
+  for (const c of ans) cnt[c] = (cnt[c] || 0) + 1;
+  for (let i = 0; i < W; i++) if (guess[i] === ans[i])  { res[i] = 'correct'; cnt[guess[i]]--; }
+  for (let i = 0; i < W; i++) if (res[i] !== 'correct' && cnt[guess[i]] > 0) { res[i] = 'present'; cnt[guess[i]]--; }
+  return res;
+}
+
+function updateKeys(guess, result) {
+  const ord = { correct: 3, present: 2, absent: 1 };
+  result.forEach((state, i) => {
+    const k = guess[i];
+    if (!keys[k] || ord[state] > ord[keys[k]]) keys[k] = state;
+  });
+}
+
+function submit() {
+  const W = secret.length;
+  if (stCol < W) { setMsg('not enough letters', 'err'); return; }
+
+  const guess  = board[stRow].join('');
+  const result = scoreGuess(guess, secret);
+  result.forEach((state, c) => setCell(stRow, c, guess[c], state));
+  updateKeys(guess, result);
+  buildKB();
+
+  if (guess === secret) {
+    won++; played++;
+    setMsg('you found the rabbit hole', 'win');
+    over = true;
+    showReveal();
+    document.getElementById('st-next').style.display = 'inline-block';
+    updateScore();
+    return;
+  }
+
+  stRow++; stCol = 0;
+
+  if (stRow < maxRows) {
+    for (let c = 0; c < W; c++) setCell(stRow, c, '', '');
+    setMsg('', '');
+  } else {
+    played++;
+    setMsg('the word was ' + secret, 'err');
+    over = true;
+    showReveal();
+    document.getElementById('st-next').style.display = 'inline-block';
+    updateScore();
+  }
+}
+
+function showReveal() {
+  const w = entry.word;
+  document.getElementById('st-reveal-word').textContent    = w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+  document.getElementById('st-reveal-typetag').textContent = entry.type + ' · ' + entry.tag;
+  document.getElementById('st-reveal-text').textContent    = entry.reveal;
+  document.getElementById('st-reveal-attr').textContent    = '— ' + entry.attr;
+
+  const lk = document.getElementById('st-reveal-link');
+  if (entry.link) {
+    lk.href        = entry.link;
+    lk.textContent = entry.linkLabel || 'read more →';
+    lk.style.display = 'inline';
+  } else {
+    lk.style.display = 'none';
+  }
+
+  document.getElementById('st-reveal').classList.add('show');
+  document.getElementById('st-hint-btn').style.display = 'none';
+  document.getElementById('st-hint-text').style.display = 'none';
+}
+
+function setMsg(t, cls) {
+  const el = document.getElementById('st-msg');
+  el.textContent = t;
+  el.className   = cls || '';
+}
+
+function updateScore() {
+  document.getElementById('st-score').textContent =
+    played > 0 ? won + ' of ' + played + ' words solved' : '';
+}
+
+loadWords();
+</script>
+</body>
+</html>
