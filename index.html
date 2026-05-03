@@ -120,6 +120,8 @@ nav a.active {
 
 .page.active { display: block; }
 
+#page-home.active { display: flex; }
+
 @keyframes pagein {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -137,10 +139,19 @@ nav a.active {
 }
 
 /* ── HOME ── */
-#page-home { max-width: 600px; }
+#page-home {
+  max-width: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
 
 #home-game-wrap {
-  margin-top: 0.5rem;
+  width: 100%;
+  max-width: 500px;
+  padding: 3rem 2rem;
 }
 
 /* ── ABOUT ── */
@@ -667,6 +678,7 @@ nav a.active {
       <a href="#" data-page="projects"    onclick="nav(this)">Projects</a>
       <a href="#" data-page="bookstack"   onclick="nav(this)">Bookstack</a>
       <a href="#" data-page="travelogues" onclick="nav(this)">Travelogues</a>
+      <a href="#" data-page="letters"     onclick="nav(this)">Letters to My Father</a>
       <a href="#" data-page="contact"     onclick="nav(this)">Contact</a>
     </nav>
 
@@ -679,8 +691,8 @@ nav a.active {
   <main id="main">
 
     <!-- HOME -->
-    <section class="page active" id="page-home">
-      <div id="home-game-wrap">
+    <section class="page active" id="page-home" style="display:flex; align-items:center; justify-content:center; min-height:100vh; padding:2rem;">
+      <div id="home-game-wrap" style="width:100%; max-width:500px;">
         <div id="st">
           <div id="st-head">
             <div id="st-title">Stumble</div>
@@ -797,6 +809,19 @@ nav a.active {
           <div class="travel-place">—</div>
           <div class="travel-date">Coming soon</div>
           <div class="travel-note">Entries are being written. Some places take time to put into words.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LETTERS TO MY FATHER -->
+    <section class="page" id="page-letters">
+      <div class="page-title">Letters to My Father</div>
+      <p class="travel-intro">Letters written across distance and time. Some sent, some not.</p>
+      <div class="travel-list">
+        <div class="travel-item">
+          <div class="travel-place">—</div>
+          <div class="travel-date">Coming soon</div>
+          <div class="travel-note">The letters are being gathered.</div>
         </div>
       </div>
     </section>
