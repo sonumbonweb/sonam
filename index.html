@@ -29,7 +29,7 @@ html, body {
 
 #wrapper { display: flex; min-height: 100vh; }
 
-/* ── sidebar ── */
+/* sidebar */
 #sidebar {
   width: var(--sidebar-w);
   min-height: 100vh;
@@ -66,13 +66,13 @@ nav a.active { color: var(--green); }
 
 #sb-foot { margin-top: auto; font-size: 11px; font-style: italic; color: #ccc; }
 
-/* ── main ── */
+/* main */
 #main { margin-left: var(--sidebar-w); flex: 1; min-height: 100vh; }
 
-/* ── all pages hidden by default ── */
+/* all pages hidden by default */
 .page { display: none; }
 
-/* ── non-home pages ── */
+/* non-home pages */
 .page.active {
   display: block;
   padding: 3rem 3rem 5rem;
@@ -80,7 +80,7 @@ nav a.active { color: var(--green); }
   animation: pagein 0.25s ease;
 }
 
-/* ── home page override ── */
+/* home page override */
 #page-home.active {
   display: flex;
   align-items: center;
@@ -95,7 +95,7 @@ nav a.active { color: var(--green); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── page title ── */
+/* page title */
 .page-title {
   font-size: 13px;
   text-transform: uppercase;
@@ -105,7 +105,7 @@ nav a.active { color: var(--green); }
   font-weight: normal;
 }
 
-/* ── section intro ── */
+/* section intro */
 .section-intro {
   font-size: 15px;
   font-style: italic;
@@ -113,23 +113,24 @@ nav a.active { color: var(--green); }
   margin-bottom: 2rem;
   max-width: 480px;
   line-height: 1.7;
+  text-align: justify;
 }
 
-/* ── about ── */
+/* about */
 .about-body { font-size: 16px; line-height: 1.85; color: #222; max-width: 520px; }
-.about-body p { margin-bottom: 1.25rem; }
+.about-body p { margin-bottom: 1.25rem; text-align: justify; }
 .placeholder-note { font-size: 13px; font-style: italic; color: #ccc !important; }
 
-/* ── projects ── */
+/* projects */
 .proj-list { display: flex; flex-direction: column; max-width: 540px; }
 .proj-item { border-bottom: 1px solid var(--grey-mid); padding: 1.5rem 0; }
 .proj-item:first-child { padding-top: 0; }
 .proj-item:last-child { border-bottom: none; }
 .proj-tag { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green); margin-bottom: 6px; }
 .proj-title { font-size: 17px; font-weight: 500; margin-bottom: 6px; }
-.proj-desc { font-size: 14px; font-style: italic; color: #555; line-height: 1.7; }
+.proj-desc { font-size: 14px; font-style: italic; color: #555; line-height: 1.7; text-align: justify; }
 
-/* ── bookstack ── */
+/* bookstack */
 .book-list { display: flex; flex-direction: column; max-width: 540px; }
 .book-item { border-bottom: 1px solid var(--grey-mid); padding: 1.4rem 0; }
 .book-item:first-child { padding-top: 0; }
@@ -138,21 +139,21 @@ nav a.active { color: var(--green); }
 .book-title { font-size: 15px; color: var(--black); }
 .book-author { font-size: 13px; font-style: italic; color: var(--grey-text); }
 .book-status { font-size: 10px; text-transform: uppercase; letter-spacing: 0.09em; color: var(--green); }
-.book-note { font-size: 14px; font-style: italic; color: #555; line-height: 1.75; max-width: 500px; }
+.book-note { font-size: 14px; font-style: italic; color: #555; line-height: 1.75; max-width: 500px; text-align: justify; }
 
-/* ── travelogues ── */
+/* travelogues */
 .travel-list { display: flex; flex-direction: column; max-width: 540px; }
 .travel-item { border-bottom: 1px solid var(--grey-mid); padding: 1.4rem 0; }
 .travel-item:first-child { padding-top: 0; }
 .travel-item:last-child { border-bottom: none; }
 .travel-place { font-size: 16px; font-weight: 500; margin-bottom: 7px; }
-.travel-note { font-size: 14px; font-style: italic; color: #555; line-height: 1.75; }
+.travel-note { font-size: 14px; font-style: italic; color: #555; line-height: 1.75; text-align: justify; }
 
-/* ── letters ── */
+/* letters */
 .letters-body { max-width: 520px; }
-.letters-body p { font-size: 15px; font-style: italic; color: var(--grey-text); line-height: 1.8; margin-bottom: 1.25rem; }
+.letters-body p { font-size: 15px; font-style: italic; color: var(--grey-text); line-height: 1.8; margin-bottom: 1.25rem; text-align: justify; }
 
-/* ── contact ── */
+/* contact */
 .contact-intro { font-size: 15px; font-style: italic; color: #444; line-height: 1.8; margin-bottom: 2.5rem; max-width: 400px; }
 .contact-list { display: flex; flex-direction: column; gap: 1.25rem; }
 .contact-item { display: flex; align-items: center; gap: 14px; }
@@ -161,7 +162,7 @@ nav a.active { color: var(--green); }
 .contact-link { font-size: 14px; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--grey-mid); padding-bottom: 1px; transition: color 0.15s, border-color 0.15s; }
 .contact-link:hover { color: var(--green); border-color: var(--green); }
 
-/* ── stumble game ── */
+/* stumble game */
 #st-wrap { width: 100%; max-width: 500px; padding: 3rem 2rem; }
 #st-head { text-align: center; margin-bottom: 2rem; }
 #st-title { font-size: 38px; font-weight: 400; letter-spacing: -1px; color: var(--black); line-height: 1; }
@@ -212,7 +213,7 @@ nav a.active { color: var(--green); }
 #st-loading { text-align: center; font-style: italic; color: #bbb; font-size: 14px; padding: 2.5rem 0; }
 #st-error { text-align: center; color: #8B1A1A; font-size: 13px; font-style: italic; display: none; padding: .5rem 0; }
 
-/* ── mobile ── */
+/* mobile */
 @media (max-width: 640px) {
   #sidebar { width: 100%; min-height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--grey-mid); padding: 1.5rem 1.25rem 1rem; flex-direction: row; align-items: center; flex-wrap: wrap; gap: 10px; }
   #wrapper { flex-direction: column; }
@@ -233,13 +234,13 @@ nav a.active { color: var(--green); }
   <aside id="sidebar">
     <div id="sb-name">SONAM BALA</div>
     <nav>
-      <a href="#" class="active" data-page="home"        onclick="goTo(this)">Home</a>
-      <a href="#"                data-page="about"       onclick="goTo(this)">About</a>
-      <a href="#"                data-page="projects"    onclick="goTo(this)">Projects</a>
-      <a href="#"                data-page="bookstack"   onclick="goTo(this)">Bookstack</a>
-      <a href="#"                data-page="travelogues" onclick="goTo(this)">Travelogues</a>
-      <a href="#"                data-page="letters"     onclick="goTo(this)">Letters to My Father</a>
-      <a href="#"                data-page="contact"     onclick="goTo(this)">Contact</a>
+      <a href="#home"        class="active" data-page="home"        onclick="goTo(this)">Home</a>
+      <a href="#about"                      data-page="about"       onclick="goTo(this)">About</a>
+      <a href="#projects"                   data-page="projects"    onclick="goTo(this)">Projects</a>
+      <a href="#bookstack"                  data-page="bookstack"   onclick="goTo(this)">Bookstack</a>
+      <a href="#travelogues"                data-page="travelogues" onclick="goTo(this)">Travelogues</a>
+      <a href="#letters"                    data-page="letters"     onclick="goTo(this)">Letters to My Father</a>
+      <a href="#contact"                    data-page="contact"     onclick="goTo(this)">Contact</a>
     </nav>
     <div id="sb-foot">&copy; <span id="yr"></span></div>
   </aside>
@@ -247,14 +248,14 @@ nav a.active { color: var(--green); }
   <!-- MAIN -->
   <main id="main">
 
-    <!-- HOME — game only -->
+    <!-- HOME -->
     <section class="page active" id="page-home">
       <div id="st-wrap">
         <div id="st-head">
           <div id="st-title">Stumble</div>
           <div id="st-sub">guess the word to enter the rabbit hole</div>
         </div>
-        <div id="st-loading">fetching the repository…</div>
+        <div id="st-loading">fetching the repository&#8230;</div>
         <div id="st-error">could not reach the repository. using built-in entries.</div>
         <div id="st-game" style="display:none;">
           <div id="st-pills">
@@ -280,36 +281,36 @@ nav a.active { color: var(--green); }
             </div>
           </div>
           <div id="st-actions">
-            <button id="st-next" onclick="startGame()">next word →</button>
+            <button id="st-next" onclick="startGame()">next word &#8594;</button>
           </div>
           <div id="st-score"></div>
         </div>
       </div>
     </section>
 
-      <!-- ABOUT -->
+    <!-- ABOUT -->
     <section class="page" id="page-about">
       <div class="page-title">About</div>
       <div class="about-body">
-        <p>I'm Sonam, and I live at the intersection of product, people, and problems worth solving.</p>
-        <p>What deeply matters to me is how technology actually changes lives. Not in the way Silicon Valley narratives frame it, but in the real, unglamorous sense. Where it reaches people who've historically been priced out, left out, or simply never considered. The habits it rewires, the friction it removes, the doors it quietly opens.</p>
+        <p>I&#8217;m Sonam, and I live at the intersection of product, people, and problems worth solving.</p>
+        <p>What deeply matters to me is how technology actually changes lives. Not in the way Silicon Valley narratives frame it, but in the real, unglamorous sense. Where it reaches people who&#8217;ve historically been priced out, left out, or simply never considered. The habits it rewires, the friction it removes, the doors it quietly opens.</p>
         <p>The fact that you are reading this from my desk, or I was able to come this far from where I do, is nothing but a testament to the above.</p>
-        <p>I spend my days figuring out what to build and why it matters. What I also find deeply interesting is the gap between what users say they want and what they actually need — or the stories that actually matter but get lost in translation.</p>
-        <p><i><b></b>Indulgences:</b> reading anything in direct line of sight [including obscure labels], hiking trails [less often than I'd like to], figuring out how systems fail including entire civilizations, and writing stuff [something that my father rightly predicted I'd waste my life onto], and word games.</i></p>
-        <p class="about-meta">📍 Bengaluru, IN <br>
-          💼 Brand &amp; Comms. Lead at <a href="https://bolna.ai" target="_blank" rel="noopener">Bolna</a></p>
+        <p>I spend my days figuring out what to build and why it matters. What I also find deeply interesting is the gap between what users say they want and what they actually need &#8212; or the stories that actually matter but get lost in translation.</p>
+        <p><i><b>Indulgences:</b> reading anything in direct line of sight [including obscure labels], hiking trails [less often than I&#8217;d like to], figuring out how systems fail including entire civilizations, and writing stuff [something that my father rightly predicted I&#8217;d waste my life onto], and word games.</i></p>
+        <p class="about-meta">&#128205; Bengaluru, IN <br>
+          &#128188; Brand &amp; Comms. Lead at <a href="https://bolna.ai" target="_blank" rel="noopener">Bolna</a></p>
       </div>
     </section>
 
     <!-- PROJECTS -->
     <section class="page" id="page-projects">
       <div class="page-title">Projects</div>
-      <p class="section-intro">Things I've built or am building — some for work, most for the satisfaction of making something exist that didn't before.</p>
+      <p class="section-intro">Things I&#8217;ve built or am building &#8212; some for work, most for the satisfaction of making something exist that didn&#8217;t before.</p>
       <div class="proj-list">
         <div class="proj-item">
           <div class="proj-tag">in progress</div>
           <div class="proj-title">Stumble</div>
-          <div class="proj-desc">A word game that doubles as a rabbit hole generator. Guess the word, get a piece of the world you didn't know about. Built in vanilla HTML, CSS, and JS — no frameworks, no fuss.</div>
+          <div class="proj-desc">A word game that doubles as a rabbit hole generator. Guess the word, get a piece of the world you didn&#8217;t know about. Built in vanilla HTML, CSS, and JS &#8212; no frameworks, no fuss.</div>
         </div>
         <div class="proj-item">
           <div class="proj-tag">coming soon</div>
@@ -322,7 +323,7 @@ nav a.active { color: var(--green); }
     <!-- BOOKSTACK -->
     <section class="page" id="page-bookstack">
       <div class="page-title">Bookstack</div>
-      <p class="section-intro">Books I've read, what I took from them, and roughly when. Not reviews — just notes to my future self.</p>
+      <p class="section-intro">Books I&#8217;ve read, what I took from them, and roughly when. Not reviews &#8212; just notes to my future self.</p>
       <div class="book-list">
 
         <div class="book-item">
@@ -331,7 +332,7 @@ nav a.active { color: var(--green); }
             <span class="book-author">Siddhartha Mukherjee</span>
             <span class="book-status">read</span>
           </div>
-          <div class="book-note">A biography of cancer — its history, the people who fought it, the ones who lost. Made me understand how science actually moves: not in clean leaps but in long, messy, human-sized struggles.</div>
+          <div class="book-note">A biography of cancer &#8212; its history, the people who fought it, the ones who lost. Made me understand how science actually moves: not in clean leaps but in long, messy, human-sized struggles.</div>
         </div>
 
         <div class="book-item">
@@ -340,7 +341,7 @@ nav a.active { color: var(--green); }
             <span class="book-author">Italo Calvino</span>
             <span class="book-status">read</span>
           </div>
-          <div class="book-note">Marco Polo describing cities to Kublai Khan — except none of the cities are real, and all of them are. Every city is some version of Venice, and every city is somewhere you've been in your mind.</div>
+          <div class="book-note">Marco Polo describing cities to Kublai Khan &#8212; except none of the cities are real, and all of them are. Every city is some version of Venice, and every city is somewhere you&#8217;ve been in your mind.</div>
         </div>
 
         <div class="book-item">
@@ -367,7 +368,7 @@ nav a.active { color: var(--green); }
             <span class="book-author">Primo Levi</span>
             <span class="book-status">reading</span>
           </div>
-          <div class="book-note">Each chapter named for a chemical element, each one a story from Levi's life as a chemist and Holocaust survivor. Quiet, precise, devastating. Reading slowly on purpose.</div>
+          <div class="book-note">Each chapter named for a chemical element, each one a story from Levi&#8217;s life as a chemist and Holocaust survivor. Quiet, precise, devastating. Reading slowly on purpose.</div>
         </div>
 
         <div class="book-item">
@@ -381,11 +382,11 @@ nav a.active { color: var(--green); }
 
         <div class="book-item">
           <div class="book-meta">
-            <span class="book-title">Surely You're Joking, Mr. Feynman!</span>
+            <span class="book-title">Surely You&#8217;re Joking, Mr. Feynman!</span>
             <span class="book-author">Richard Feynman</span>
             <span class="book-status">read</span>
           </div>
-          <div class="book-note">Pure joy. A physicist who approached everything — physics, people, life — with the same irreverent curiosity. Made me want to be better at being interested in things.</div>
+          <div class="book-note">Pure joy. A physicist who approached everything &#8212; physics, people, life &#8212; with the same irreverent curiosity. Made me want to be better at being interested in things.</div>
         </div>
 
       </div>
@@ -394,67 +395,67 @@ nav a.active { color: var(--green); }
     <!-- TRAVELOGUES -->
     <section class="page" id="page-travelogues">
       <div class="page-title">Travelogues</div>
-      <p class="section-intro">Not itineraries. Just the bits that stuck — a smell, a conversation, the quality of light at a particular time. Places written down before they blur.</p>
+      <p class="section-intro">Not itineraries. Just the bits that stuck &#8212; a smell, a conversation, the quality of light at a particular time. Places written down before they blur.</p>
       <div class="travel-list">
 
         <div class="travel-item">
           <div class="travel-place">Chikkamagalur</div>
-          <div class="travel-note">Coffee estates in the fog. The kind of quiet that feels earned after a long drive. Woke up early one morning and sat with the mist and a cup of something bitter and warm. There's a gentleness to this part of Karnataka that I wasn't expecting.</div>
+          <div class="travel-note">Coffee estates in the fog. The kind of quiet that feels earned after a long drive. Woke up early one morning and sat with the mist and a cup of something bitter and warm. There&#8217;s a gentleness to this part of Karnataka that I wasn&#8217;t expecting.</div>
         </div>
 
         <div class="travel-item">
           <div class="travel-place">Wayanad</div>
-          <div class="travel-note">Green on green on green. Every road curves into something you didn't expect — a waterfall, a tribal village, a viewpoint that makes you feel like the earth is showing off. The rain there is different. More intentional.</div>
+          <div class="travel-note">Green on green on green. Every road curves into something you didn&#8217;t expect &#8212; a waterfall, a tribal village, a viewpoint that makes you feel like the earth is showing off. The rain there is different. More intentional.</div>
         </div>
 
         <div class="travel-item">
           <div class="travel-place">Bangalore</div>
-          <div class="travel-note">Home base. The city I've watched change faster than I've wanted it to. The old pubs, the new glass buildings, the traffic that no longer surprises anyone. But then there's a morning at Lalbagh, or a long conversation on a rooftop, and it still makes sense to be here.</div>
+          <div class="travel-note">Home base. The city I&#8217;ve watched change faster than I&#8217;ve wanted it to. The old pubs, the new glass buildings, the traffic that no longer surprises anyone. But then there&#8217;s a morning at Lalbagh, or a long conversation on a rooftop, and it still makes sense to be here.</div>
         </div>
 
         <div class="travel-item">
           <div class="travel-place">Delhi</div>
-          <div class="travel-note">Delhi demands something from you. The scale, the history, the noise. I've been multiple times and each time it reveals a different layer — Mughal Delhi, colonial Delhi, chaotic modern Delhi. The winters are brutal and beautiful.</div>
+          <div class="travel-note">Delhi demands something from you. The scale, the history, the noise. I&#8217;ve been multiple times and each time it reveals a different layer &#8212; Mughal Delhi, colonial Delhi, chaotic modern Delhi. The winters are brutal and beautiful.</div>
         </div>
 
         <div class="travel-item">
           <div class="travel-place">Kolkata</div>
-          <div class="travel-note">The most literary city I've been to. Everything feels like it was written first and then built. Old trams, crumbling colonial facades, bookshops on every corner. I want to go back and do nothing except walk and eat.</div>
+          <div class="travel-note">The most literary city I&#8217;ve been to. Everything feels like it was written first and then built. Old trams, crumbling colonial facades, bookshops on every corner. I want to go back and do nothing except walk and eat.</div>
         </div>
 
         <div class="travel-item">
-          <div class="travel-place">Digha · Bhubaneswar · Puri · Konark · Chilika Lake · Haldia</div>
-          <div class="travel-note">Odisha is underrated in the most satisfying way. The coast at Digha is honest and unpolished. Konark at dusk is genuinely haunting. Chilika in the early morning — flamingos in the distance, the lake a flat silver mirror.</div>
+          <div class="travel-place">Digha &middot; Bhubaneswar &middot; Puri &middot; Konark &middot; Chilika Lake &middot; Haldia</div>
+          <div class="travel-note">Odisha is underrated in the most satisfying way. The coast at Digha is honest and unpolished. Konark at dusk is genuinely haunting. Chilika in the early morning &#8212; flamingos in the distance, the lake a flat silver mirror.</div>
         </div>
 
         <div class="travel-item">
-          <div class="travel-place">Ahmedabad · Vadodara</div>
-          <div class="travel-note">Gujarat moves at its own rhythm. The old city of Ahmedabad has a density of history per square metre that's hard to process. Vadodara felt more human-sized. Both places have food I think about more than I should.</div>
+          <div class="travel-place">Ahmedabad &middot; Vadodara</div>
+          <div class="travel-note">Gujarat moves at its own rhythm. The old city of Ahmedabad has a density of history per square metre that&#8217;s hard to process. Vadodara felt more human-sized. Both places have food I think about more than I should.</div>
         </div>
 
         <div class="travel-item">
-          <div class="travel-place">Mumbai · Pune</div>
-          <div class="travel-note">Mumbai is a city that exists in a state of controlled emergency at all times. I find that strangely energising in small doses. Pune is Mumbai's quieter, more self-assured neighbour — a city that doesn't need to prove anything.</div>
+          <div class="travel-place">Mumbai &middot; Pune</div>
+          <div class="travel-note">Mumbai is a city that exists in a state of controlled emergency at all times. I find that strangely energising in small doses. Pune is Mumbai&#8217;s quieter, more self-assured neighbour &#8212; a city that doesn&#8217;t need to prove anything.</div>
         </div>
 
         <div class="travel-item">
-          <div class="travel-place">Mukteshwar · Haldwani · Nainital</div>
-          <div class="travel-note">The Kumaon hills have a specific quality of air that you notice immediately — cleaner, thinner, colder at night than you're prepared for. Nainital in the off-season, almost empty, is one of the better things I've done.</div>
+          <div class="travel-place">Mukteshwar &middot; Haldwani &middot; Nainital</div>
+          <div class="travel-note">The Kumaon hills have a specific quality of air that you notice immediately &#8212; cleaner, thinner, colder at night than you&#8217;re prepared for. Nainital in the off-season, almost empty, is one of the better things I&#8217;ve done.</div>
         </div>
 
         <div class="travel-item">
-          <div class="travel-place">Pachmarhi · Jabalpur</div>
-          <div class="travel-note">Madhya Pradesh is underexplored and Pachmarhi is proof of that. Jabalpur has the Marble Rocks at Bhedaghat — white rock, dark water, slow boat, no words necessary.</div>
+          <div class="travel-place">Pachmarhi &middot; Jabalpur</div>
+          <div class="travel-note">Madhya Pradesh is underexplored and Pachmarhi is proof of that. Jabalpur has the Marble Rocks at Bhedaghat &#8212; white rock, dark water, slow boat, no words necessary.</div>
         </div>
 
         <div class="travel-item">
           <div class="travel-place">Banaras</div>
-          <div class="travel-note">There is no city in India quite like it. The ghats at dawn with the river fog lifting — you understand immediately why people have been coming here for thousands of years. I arrived thinking I'd stay two days and left after five.</div>
+          <div class="travel-note">There is no city in India quite like it. The ghats at dawn with the river fog lifting &#8212; you understand immediately why people have been coming here for thousands of years. I arrived thinking I&#8217;d stay two days and left after five.</div>
         </div>
 
         <div class="travel-item">
-          <div class="travel-place">Dehradun · Haridwar · Rishikesh · Kanatal · Burwa</div>
-          <div class="travel-note">The Garhwal region keeps pulling me back. Rishikesh at the riverbank before the tourists arrive. Haridwar's Ganga Aarti — theatrical and genuinely moving at the same time. Kanatal and Burwa are places you only find when someone who knows better takes you there.</div>
+          <div class="travel-place">Dehradun &middot; Haridwar &middot; Rishikesh &middot; Kanatal &middot; Burwa</div>
+          <div class="travel-note">The Garhwal region keeps pulling me back. Rishikesh at the riverbank before the tourists arrive. Haridwar&#8217;s Ganga Aarti &#8212; theatrical and genuinely moving at the same time. Kanatal and Burwa are places you only find when someone who knows better takes you there.</div>
         </div>
 
         <div class="travel-item">
@@ -463,8 +464,8 @@ nav a.active { color: var(--green); }
         </div>
 
         <div class="travel-item">
-          <div class="travel-place">Jammu · Kanpur · Lucknow</div>
-          <div class="travel-note">Lucknow has the best kebabs I've ever eaten and an architectural refinement that surprises you. Nawabi in the best sense — a city that was once a centre of culture and still carries that in its bones.</div>
+          <div class="travel-place">Jammu &middot; Kanpur &middot; Lucknow</div>
+          <div class="travel-note">Lucknow has the best kebabs I&#8217;ve ever eaten and an architectural refinement that surprises you. Nawabi in the best sense &#8212; a city that was once a centre of culture and still carries that in its bones.</div>
         </div>
 
         <div class="travel-item">
@@ -473,13 +474,13 @@ nav a.active { color: var(--green); }
         </div>
 
         <div class="travel-item">
-          <div class="travel-place">Andaman & Nicobar</div>
-          <div class="travel-note">The bluest water I've ever seen. And the Cellular Jail at sunset — you stand in the same space where independence movement prisoners were held and you feel it, physically. The islands exist outside normal time.</div>
+          <div class="travel-place">Andaman &amp; Nicobar</div>
+          <div class="travel-note">The bluest water I&#8217;ve ever seen. And the Cellular Jail at sunset &#8212; you stand in the same space where independence movement prisoners were held and you feel it, physically. The islands exist outside normal time.</div>
         </div>
 
         <div class="travel-item">
           <div class="travel-place">Guwahati</div>
-          <div class="travel-note">Gateway to the Northeast — a city that feels like a beginning, not a destination. The Brahmaputra is wider than you expect. Starting point for something I want to do more of.</div>
+          <div class="travel-note">Gateway to the Northeast &#8212; a city that feels like a beginning, not a destination. The Brahmaputra is wider than you expect. Starting point for something I want to do more of.</div>
         </div>
 
       </div>
@@ -491,14 +492,14 @@ nav a.active { color: var(--green); }
       <div class="letters-body">
         <p>Letters written across distance and time. Some sent. Most not.</p>
         <p>A record of things I wanted to say and kept finding new ways to almost say. No particular order. No particular audience.</p>
-        <p>The first letter is being written. Check back when there's something to read.</p>
+        <p>The first letter is being written. Check back when there&#8217;s something to read.</p>
       </div>
     </section>
 
     <!-- CONTACT -->
     <section class="page" id="page-contact">
       <div class="page-title">Contact</div>
-      <p class="contact-intro">The best way to reach me is by email. I'm also on LinkedIn if that's easier.</p>
+      <p class="contact-intro">The best way to reach me is by email. I&#8217;m also on LinkedIn if that&#8217;s easier.</p>
       <div class="contact-list">
         <div class="contact-item">
           <div class="contact-icon">
@@ -521,15 +522,47 @@ nav a.active { color: var(--green); }
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-function goTo(el) {
-  event.preventDefault();
-  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+// ROUTING
+const PAGE_MAP = {
+  'home':        'page-home',
+  'about':       'page-about',
+  'projects':    'page-projects',
+  'bookstack':   'page-bookstack',
+  'travelogues': 'page-travelogues',
+  'letters':     'page-letters',
+  'contact':     'page-contact'
+};
+
+function activatePage(pageKey) {
+  const key = PAGE_MAP[pageKey] ? pageKey : 'home';
+  document.querySelectorAll('nav a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === key);
+  });
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('page-' + el.dataset.page).classList.add('active');
+  document.getElementById(PAGE_MAP[key]).classList.add('active');
 }
 
-// ── STUMBLE ──
+function goTo(el) {
+  event.preventDefault();
+  const page = el.dataset.page;
+  history.pushState({ page }, '', '#' + page);
+  activatePage(page);
+}
+
+window.addEventListener('popstate', e => {
+  const page = e.state && e.state.page ? e.state.page : (location.hash.slice(1) || 'home');
+  activatePage(page);
+});
+
+(function() {
+  const hash = location.hash.slice(1) || 'home';
+  if (PAGE_MAP[hash]) {
+    activatePage(hash);
+    history.replaceState({ page: hash }, '', '#' + hash);
+  }
+})();
+
+// STUMBLE
 const GITHUB_RAW = 'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/words.json';
 
 const FALLBACK = [
@@ -548,7 +581,7 @@ const FALLBACK = [
   { word:"AUTOPILOT", tag:"technology", type:"history", hint:"Planes flew themselves before you think.", reveal:"Autopilot systems existed as early as 1912, allowing aircraft to maintain course automatically.", attr:"Aviation history", link:"https://en.wikipedia.org/wiki/Autopilot", linkLabel:"read about autopilot" },
   { word:"AKIRA", tag:"film", type:"culture", hint:"A city rebuilt on psychic destruction.", reveal:"Akira shaped cyberpunk globally, blending political unrest with psychic power in post-war Tokyo.", attr:"1988 anime film", link:"https://en.wikipedia.org/wiki/Akira_(1988_film)", linkLabel:"explore Akira" },
   { word:"MAYA", tag:"civilisation", type:"history", hint:"A calendar more precise than ours.", reveal:"The Maya developed advanced astronomical systems and complex calendars without modern tools.", attr:"Mesoamerica", link:"https://en.wikipedia.org/wiki/Maya_civilization", linkLabel:"explore Maya" },
-  { word:"SCHRODINGER", tag:"science", type:"thought experiment", hint:"Alive and dead at once.", reveal:"Schrödinger’s cat illustrates quantum superposition — a system existing in multiple states simultaneously.", attr:"Quantum mechanics", link:"https://en.wikipedia.org/wiki/Schr%C3%B6dinger%27s_cat", linkLabel:"open the box" },
+  { word:"SCHRODINGER", tag:"science", type:"thought experiment", hint:"Alive and dead at once.", reveal:"Schrödinger's cat illustrates quantum superposition — a system existing in multiple states simultaneously.", attr:"Quantum mechanics", link:"https://en.wikipedia.org/wiki/Schr%C3%B6dinger%27s_cat", linkLabel:"open the box" },
   { word:"PROMETHEUS", tag:"myth", type:"symbol", hint:"He stole fire for humanity.", reveal:"Prometheus represents rebellion against divine authority and the cost of progress.", attr:"Greek mythology", link:"https://en.wikipedia.org/wiki/Prometheus", linkLabel:"read Prometheus" },
   { word:"INCEPTION", tag:"film", type:"concept", hint:"Dreams within dreams.", reveal:"Inception explores nested realities where time dilates and perception becomes unreliable.", attr:"Christopher Nolan", link:"https://en.wikipedia.org/wiki/Inception", linkLabel:"enter Inception" },
   { word:"ROME", tag:"civilisation", type:"history", hint:"An empire that shaped the world.", reveal:"Roman law, engineering, and governance still influence modern societies.", attr:"Ancient Rome", link:"https://en.wikipedia.org/wiki/Ancient_Rome", linkLabel:"explore Rome" },
@@ -556,63 +589,59 @@ const FALLBACK = [
   { word:"NIETZSCHE", tag:"philosophy", type:"biography", hint:"God is dead — now what?", reveal:"Nietzsche explored morality beyond religion, introducing the concept of the Übermensch.", attr:"Friedrich Nietzsche", link:"https://en.wikipedia.org/wiki/Friedrich_Nietzsche", linkLabel:"read Nietzsche" },
   { word:"VENICE", tag:"city", type:"history", hint:"A city floating on water.", reveal:"Venice was a maritime republic that dominated trade routes between East and West.", attr:"Italy", link:"https://en.wikipedia.org/wiki/Venice", linkLabel:"explore Venice" },
   { word:"BIGBANG", tag:"universe", type:"theory", hint:"Everything began from nothing.", reveal:"The Big Bang describes the universe expanding from a singularity 13.8 billion years ago.", attr:"Cosmology", link:"https://en.wikipedia.org/wiki/Big_Bang", linkLabel:"explore the Big Bang" },
-  { word:"1984", tag:"book", type:"dystopia", hint:"A world where truth is rewritten daily.", reveal:"George Orwell’s 1984 introduced concepts like Newspeak and doublethink — mechanisms by which language itself controls reality.", attr:"George Orwell (1949)", link:"https://en.wikipedia.org/wiki/Nineteen_Eighty-Four", linkLabel:"read about 1984" },
-{ word:"BRAVE", tag:"book", type:"dystopia", hint:"Control through pleasure, not fear.", reveal:"Brave New World imagines a society engineered for happiness through conditioning and drugs — raising questions about freedom vs comfort.", attr:"Aldous Huxley (1932)", link:"https://en.wikipedia.org/wiki/Brave_New_World", linkLabel:"explore Brave New World" },
-{ word:"DUNE", tag:"book", type:"epic", hint:"Power, prophecy, and desert planets.", reveal:"Frank Herbert’s Dune blends ecology, religion, and politics into a saga where control of spice determines the fate of the universe.", attr:"Frank Herbert (1965)", link:"https://en.wikipedia.org/wiki/Dune_(novel)", linkLabel:"enter Dune" },
-{ word:"LOLIBOOK", tag:"book", type:"controversy", hint:"A masterpiece or moral nightmare?", reveal:"Lolita is both a disturbing narrative and a literary landmark, forcing readers to confront unreliable narration and moral discomfort.", attr:"Vladimir Nabokov (1955)", link:"https://en.wikipedia.org/wiki/Lolita", linkLabel:"read Lolita" },
-{ word:"ULYSSES", tag:"book", type:"modernism", hint:"A single day, infinitely complex.", reveal:"James Joyce’s Ulysses transforms an ordinary day in Dublin into an experimental narrative mirroring The Odyssey.", attr:"James Joyce (1922)", link:"https://en.wikipedia.org/wiki/Ulysses_(novel)", linkLabel:"explore Ulysses" },
-{ word:"SAPIENS", tag:"book", type:"history", hint:"A story of humans who believed in stories.", reveal:"Sapiens argues that shared myths — from money to nations — enabled large-scale human cooperation.", attr:"Yuval Noah Harari (2011)", link:"https://en.wikipedia.org/wiki/Sapiens:_A_Brief_History_of_Humankind", linkLabel:"read Sapiens" },
-{ word:"ALCHEMIST", tag:"book", type:"philosophy", hint:"The universe conspires for you.", reveal:"The Alchemist presents a spiritual journey about destiny, intuition, and personal legend.", attr:"Paulo Coelho (1988)", link:"https://en.wikipedia.org/wiki/The_Alchemist_(novel)", linkLabel:"read The Alchemist" },
-{ word:"CATCH22", tag:"book", type:"satire", hint:"You’re trapped by logic itself.", reveal:"Catch-22 describes a paradox where rules prevent escape — a term now used for bureaucratic absurdity.", attr:"Joseph Heller (1961)", link:"https://en.wikipedia.org/wiki/Catch-22", linkLabel:"understand Catch-22" },
-{ word:"FRANKEN", tag:"book", type:"gothic", hint:"The creator fears his creation.", reveal:"Frankenstein explores ambition, isolation, and responsibility in the face of scientific progress.", attr:"Mary Shelley (1818)", link:"https://en.wikipedia.org/wiki/Frankenstein", linkLabel:"read Frankenstein" },
-{ word:"METAMOR", tag:"book", type:"existential", hint:"He woke up as an insect.", reveal:"Kafka’s Metamorphosis reflects alienation and identity through surreal transformation.", attr:"Franz Kafka (1915)", link:"https://en.wikipedia.org/wiki/The_Metamorphosis", linkLabel:"read Metamorphosis" },
-{ word:"GRAVITY", tag:"book", type:"postmodern", hint:"A rocket defines everything.", reveal:"Gravity’s Rainbow connects paranoia, war, and technology into a fragmented narrative web.", attr:"Thomas Pynchon (1973)", link:"https://en.wikipedia.org/wiki/Gravity%27s_Rainbow", linkLabel:"explore Gravity's Rainbow" },
-{ word:"INFINITE", tag:"book", type:"postmodern", hint:"Entertainment that traps you forever.", reveal:"Infinite Jest explores addiction and media through a film so pleasurable it immobilizes viewers.", attr:"David Foster Wallace (1996)", link:"https://en.wikipedia.org/wiki/Infinite_Jest", linkLabel:"read Infinite Jest" },
-{ word:"OUTLIERS", tag:"book", type:"analysis", hint:"Success isn’t what you think.", reveal:"Outliers argues that opportunity and timing matter as much as talent.", attr:"Malcolm Gladwell (2008)", link:"https://en.wikipedia.org/wiki/Outliers_(book)", linkLabel:"explore Outliers" },
-{ word:"HOBBIT", tag:"book", type:"fantasy", hint:"A journey that changes everything.", reveal:"The Hobbit introduces Middle-earth and themes of courage, greed, and transformation.", attr:"J.R.R. Tolkien (1937)", link:"https://en.wikipedia.org/wiki/The_Hobbit", linkLabel:"enter The Hobbit" },
-{ word:"FOG", tag:"phenomenon", type:"natural", hint:"Seeing without seeing.", reveal:"Fog forms when air cools to its dew point, reducing visibility and distorting perception.", attr:"Meteorology", link:"https://en.wikipedia.org/wiki/Fog", linkLabel:"explore fog" },
-{ word:"AURORA", tag:"phenomenon", type:"cosmic", hint:"Lights from solar winds.", reveal:"Auroras occur when charged particles collide with Earth’s atmosphere, creating glowing skies.", attr:"Space physics", link:"https://en.wikipedia.org/wiki/Aurora", linkLabel:"see auroras" },
-{ word:"DEJAVU", tag:"phenomenon", type:"cognitive", hint:"You’ve been here before.", reveal:"Déjà vu may result from mismatched memory processing, giving a false sense of familiarity.", attr:"Cognitive science", link:"https://en.wikipedia.org/wiki/D%C3%A9j%C3%A0_vu", linkLabel:"understand déjà vu" },
-{ word:"FLOW", tag:"phenomenon", type:"psychology", hint:"You lose track of time.", reveal:"Flow is a mental state of deep immersion where performance and satisfaction peak.", attr:"Mihaly Csikszentmihalyi", link:"https://en.wikipedia.org/wiki/Flow_(psychology)", linkLabel:"enter flow" },
-{ word:"PLACEBO", tag:"phenomenon", type:"medical", hint:"Belief changes biology.", reveal:"The placebo effect shows that expectation alone can produce measurable physiological outcomes.", attr:"Medicine", link:"https://en.wikipedia.org/wiki/Placebo", linkLabel:"explore placebo" },
-{ word:"BUTTERFLY", tag:"phenomenon", type:"chaos", hint:"Small changes, massive impact.", reveal:"The butterfly effect describes how tiny initial differences can lead to vastly different outcomes.", attr:"Chaos theory", link:"https://en.wikipedia.org/wiki/Butterfly_effect", linkLabel:"understand chaos" },
-{ word:"SLEEP", tag:"phenomenon", type:"biology", hint:"Why do we lose consciousness daily?", reveal:"Sleep consolidates memory, repairs the body, and regulates emotions — yet its full purpose remains debated.", attr:"Neuroscience", link:"https://en.wikipedia.org/wiki/Sleep", linkLabel:"study sleep" },
-{ word:"LUCID", tag:"phenomenon", type:"dreaming", hint:"Dreaming while aware.", reveal:"Lucid dreaming allows conscious control within dreams, blurring reality and imagination.", attr:"Dream research", link:"https://en.wikipedia.org/wiki/Lucid_dream", linkLabel:"explore lucid dreaming" },
-{ word:"TIME", tag:"phenomenon", type:"concept", hint:"It flows only forward — or does it?", reveal:"Time may be an emergent property rather than a fundamental force, challenging intuitive experience.", attr:"Physics", link:"https://en.wikipedia.org/wiki/Time", linkLabel:"explore time" },
-{ word:"ECHO", tag:"phenomenon", type:"acoustic", hint:"Sound returning to you.", reveal:"Echoes occur when sound waves reflect off surfaces and return after a delay.", attr:"Acoustics", link:"https://en.wikipedia.org/wiki/Echo", linkLabel:"understand echo" },
-{ word:"FIREWHIRL", tag:"phenomenon", type:"extreme", hint:"A tornado made of fire.", reveal:"Fire whirls occur when heat and wind combine to create rotating columns of flame.", attr:"Fire science", link:"https://en.wikipedia.org/wiki/Fire_whirl", linkLabel:"see fire whirl" },
-{ word:"MIRAGE", tag:"phenomenon", type:"optical", hint:"Water that isn’t there.", reveal:"Mirages occur when light bends due to temperature differences, creating illusions.", attr:"Optics", link:"https://en.wikipedia.org/wiki/Mirage", linkLabel:"explore mirages" },
-{ word:"SYNESTHESIA", tag:"phenomenon", type:"neurological", hint:"Seeing sounds, tasting colors.", reveal:"Synesthesia links senses, causing cross-perception experiences.", attr:"Neuroscience", link:"https://en.wikipedia.org/wiki/Synesthesia", linkLabel:"understand synesthesia" },
-{ word:"GRAVITY", tag:"phenomenon", type:"physics", hint:"The force that shapes the universe.", reveal:"Gravity curves spacetime, governing motion from falling apples to galaxies.", attr:"Relativity", link:"https://en.wikipedia.org/wiki/Gravity", linkLabel:"explore gravity" },
-{ word:"DOPPLER", tag:"phenomenon", type:"physics", hint:"Sound shifts as things move.", reveal:"The Doppler effect explains pitch changes based on motion — used in radar and astronomy.", attr:"Physics", link:"https://en.wikipedia.org/wiki/Doppler_effect", linkLabel:"learn Doppler effect" },
-{ word:"EVEREST", tag:"mountain", type:"extreme", hint:"The highest point humans can stand on.", reveal:"Mount Everest rises 8,848.86 meters above sea level, yet climbing it is more about surviving low oxygen and weather than raw height.", attr:"Himalayas, Nepal–China", link:"https://en.wikipedia.org/wiki/Mount_Everest", linkLabel:"explore Everest" },
-{ word:"K2", tag:"mountain", type:"extreme", hint:"Harder than Everest, deadlier too.", reveal:"K2 has one of the highest fatality rates among major peaks due to unpredictable weather and technical difficulty.", attr:"Karakoram Range", link:"https://en.wikipedia.org/wiki/K2", linkLabel:"explore K2" },
-{ word:"ANNAPURNA", tag:"mountain", type:"extreme", hint:"Beauty with a cost.", reveal:"Annapurna I has historically had one of the highest death-to-summit ratios among 8000m peaks.", attr:"Nepal Himalayas", link:"https://en.wikipedia.org/wiki/Annapurna", linkLabel:"explore Annapurna" },
-{ word:"KAILASH", tag:"mountain", type:"sacred", hint:"No one climbs this peak.", reveal:"Mount Kailash is considered sacred in Hinduism, Buddhism, Jainism, and Bon — climbing it is forbidden.", attr:"Tibet", link:"https://en.wikipedia.org/wiki/Mount_Kailash", linkLabel:"explore Kailash" },
-{ word:"FUJI", tag:"mountain", type:"cultural", hint:"A volcano turned icon.", reveal:"Mount Fuji is both an active volcano and a spiritual symbol deeply embedded in Japanese culture.", attr:"Japan", link:"https://en.wikipedia.org/wiki/Mount_Fuji", linkLabel:"explore Fuji" },
-{ word:"KILIMANJARO", tag:"mountain", type:"volcanic", hint:"Africa’s highest peak.", reveal:"Kilimanjaro is a dormant volcano with three cones and shrinking glaciers.", attr:"Tanzania", link:"https://en.wikipedia.org/wiki/Mount_Kilimanjaro", linkLabel:"explore Kilimanjaro" },
-{ word:"ALPS", tag:"mountain", type:"range", hint:"Europe’s natural barrier.", reveal:"The Alps span eight countries and have shaped climate, culture, and warfare for centuries.", attr:"Europe", link:"https://en.wikipedia.org/wiki/Alps", linkLabel:"explore the Alps" },
-{ word:"ANDES", tag:"mountain", type:"range", hint:"The longest mountain range.", reveal:"The Andes stretch over 7,000 km along South America’s western edge.", attr:"South America", link:"https://en.wikipedia.org/wiki/Andes", linkLabel:"explore the Andes" },
-{ word:"ROCKIES", tag:"mountain", type:"range", hint:"A backbone of North America.", reveal:"The Rocky Mountains influence weather patterns and ecosystems across the continent.", attr:"North America", link:"https://en.wikipedia.org/wiki/Rocky_Mountains", linkLabel:"explore Rockies" },
-{ word:"APPALACHIAN", tag:"trail", type:"long-distance", hint:"A path across half a continent.", reveal:"The Appalachian Trail spans over 3,500 km across the eastern United States.", attr:"USA", link:"https://en.wikipedia.org/wiki/Appalachian_Trail", linkLabel:"hike the Appalachian Trail" },
-{ word:"PACIFICCREST", tag:"trail", type:"long-distance", hint:"From desert to alpine.", reveal:"The Pacific Crest Trail runs from Mexico to Canada through varied terrains including deserts and mountains.", attr:"USA", link:"https://en.wikipedia.org/wiki/Pacific_Crest_Trail", linkLabel:"explore PCT" },
-{ word:"CAMINO", tag:"trail", type:"pilgrimage", hint:"A walk toward meaning.", reveal:"The Camino de Santiago is a network of pilgrimage routes leading to a shrine in Spain.", attr:"Spain", link:"https://en.wikipedia.org/wiki/Camino_de_Santiago", linkLabel:"walk the Camino" },
-{ word:"MACHUPICCHU", tag:"place", type:"heritage", hint:"A city in the clouds.", reveal:"Machu Picchu was an Incan citadel hidden in the Andes, rediscovered in 1911.", attr:"Peru", link:"https://en.wikipedia.org/wiki/Machu_Picchu", linkLabel:"explore Machu Picchu" },
-{ word:"PETRA", tag:"place", type:"ancient", hint:"A city carved into stone.", reveal:"Petra was the capital of the Nabataean kingdom, known for rock-cut architecture.", attr:"Jordan", link:"https://en.wikipedia.org/wiki/Petra", linkLabel:"explore Petra" },
-{ word:"ANGKOR", tag:"place", type:"ancient", hint:"A lost jungle city.", reveal:"Angkor was the center of the Khmer Empire and includes the famous Angkor Wat temple.", attr:"Cambodia", link:"https://en.wikipedia.org/wiki/Angkor", linkLabel:"explore Angkor" },
-{ word:"VARANASI", tag:"city", type:"spiritual", hint:"One of the oldest living cities.", reveal:"Varanasi has been continuously inhabited for thousands of years and is central to Hindu rituals.", attr:"India", link:"https://en.wikipedia.org/wiki/Varanasi", linkLabel:"explore Varanasi" },
-{ word:"ULURU", tag:"place", type:"sacred", hint:"A rock with deep meaning.", reveal:"Uluru is sacred to Indigenous Australians and carries cultural and spiritual significance.", attr:"Australia", link:"https://en.wikipedia.org/wiki/Uluru", linkLabel:"explore Uluru" },
-{ word:"SAHARA", tag:"place", type:"desert", hint:"A sea of sand.", reveal:"The Sahara is the largest hot desert, with extreme temperature shifts and vast dunes.", attr:"Africa", link:"https://en.wikipedia.org/wiki/Sahara", linkLabel:"explore Sahara" },
-{ word:"GOBI", tag:"place", type:"desert", hint:"Cold, harsh, and vast.", reveal:"The Gobi Desert is known for extreme temperatures and fossil discoveries.", attr:"Mongolia/China", link:"https://en.wikipedia.org/wiki/Gobi_Desert", linkLabel:"explore Gobi" },
-{ word:"AMAZON", tag:"place", type:"ecosystem", hint:"The lungs of Earth.", reveal:"The Amazon rainforest produces significant oxygen and hosts immense biodiversity.", attr:"South America", link:"https://en.wikipedia.org/wiki/Amazon_rainforest", linkLabel:"explore Amazon" },
-{ word:"ANTARCTICA", tag:"place", type:"extreme", hint:"A frozen continent.", reveal:"Antarctica is the coldest, driest, and windiest continent on Earth.", attr:"South Pole", link:"https://en.wikipedia.org/wiki/Antarctica", linkLabel:"explore Antarctica" },
-{ word:"DEATHVALLEY", tag:"place", type:"extreme", hint:"The hottest place on Earth.", reveal:"Death Valley holds records for extreme heat and arid conditions.", attr:"USA", link:"https://en.wikipedia.org/wiki/Death_Valley", linkLabel:"explore Death Valley" },
-{ word:"GRANDCANYON", tag:"place", type:"geology", hint:"A timeline carved in rock.", reveal:"The Grand Canyon reveals millions of years of geological history.", attr:"USA", link:"https://en.wikipedia.org/wiki/Grand_Canyon", linkLabel:"explore Grand Canyon" },
-{ word:"GALAPAGOS", tag:"place", type:"ecosystem", hint:"Evolution in isolation.", reveal:"The Galápagos Islands inspired Darwin’s theory of evolution.", attr:"Ecuador", link:"https://en.wikipedia.org/wiki/Gal%C3%A1pagos_Islands", linkLabel:"explore Galápagos" },
-{ word:"YELLOWSTONE", tag:"place", type:"geothermal", hint:"A volcano beneath a park.", reveal:"Yellowstone sits atop a supervolcano with geysers and hot springs.", attr:"USA", link:"https://en.wikipedia.org/wiki/Yellowstone_National_Park", linkLabel:"explore Yellowstone" },
-{ word:"BANFF", tag:"place", type:"nature", hint:"Turquoise lakes and peaks.", reveal:"Banff National Park is known for glaciers, lakes, and alpine landscapes.", attr:"Canada", link:"https://en.wikipedia.org/wiki/Banff_National_Park", linkLabel:"explore Banff" },
-{ word:"PATAGONIA", tag:"place", type:"wild", hint:"The edge of the world.", reveal:"Patagonia spans Argentina and Chile, known for glaciers and rugged terrain.", attr:"South America", link:"https://en.wikipedia.org/wiki/Patagonia", linkLabel:"explore Patagonia" },
-{ word:"TORRES", tag:"mountain", type:"iconic", hint:"Spikes of stone in the sky.", reveal:"Torres del Paine features dramatic granite peaks formed by glacial activity.", attr:"Chile", link:"https://en.wikipedia.org/wiki/Torres_del_Paine", linkLabel:"explore Torres del Paine" }
+  { word:"1984", tag:"book", type:"dystopia", hint:"A world where truth is rewritten daily.", reveal:"George Orwell's 1984 introduced concepts like Newspeak and doublethink — mechanisms by which language itself controls reality.", attr:"George Orwell (1949)", link:"https://en.wikipedia.org/wiki/Nineteen_Eighty-Four", linkLabel:"read about 1984" },
+  { word:"BRAVE", tag:"book", type:"dystopia", hint:"Control through pleasure, not fear.", reveal:"Brave New World imagines a society engineered for happiness through conditioning and drugs — raising questions about freedom vs comfort.", attr:"Aldous Huxley (1932)", link:"https://en.wikipedia.org/wiki/Brave_New_World", linkLabel:"explore Brave New World" },
+  { word:"DUNE", tag:"book", type:"epic", hint:"Power, prophecy, and desert planets.", reveal:"Frank Herbert's Dune blends ecology, religion, and politics into a saga where control of spice determines the fate of the universe.", attr:"Frank Herbert (1965)", link:"https://en.wikipedia.org/wiki/Dune_(novel)", linkLabel:"enter Dune" },
+  { word:"LOLIBOOK", tag:"book", type:"controversy", hint:"A masterpiece or moral nightmare?", reveal:"Lolita is both a disturbing narrative and a literary landmark, forcing readers to confront unreliable narration and moral discomfort.", attr:"Vladimir Nabokov (1955)", link:"https://en.wikipedia.org/wiki/Lolita", linkLabel:"read Lolita" },
+  { word:"ULYSSES", tag:"book", type:"modernism", hint:"A single day, infinitely complex.", reveal:"James Joyce's Ulysses transforms an ordinary day in Dublin into an experimental narrative mirroring The Odyssey.", attr:"James Joyce (1922)", link:"https://en.wikipedia.org/wiki/Ulysses_(novel)", linkLabel:"explore Ulysses" },
+  { word:"SAPIENS", tag:"book", type:"history", hint:"A story of humans who believed in stories.", reveal:"Sapiens argues that shared myths — from money to nations — enabled large-scale human cooperation.", attr:"Yuval Noah Harari (2011)", link:"https://en.wikipedia.org/wiki/Sapiens:_A_Brief_History_of_Humankind", linkLabel:"read Sapiens" },
+  { word:"ALCHEMIST", tag:"book", type:"philosophy", hint:"The universe conspires for you.", reveal:"The Alchemist presents a spiritual journey about destiny, intuition, and personal legend.", attr:"Paulo Coelho (1988)", link:"https://en.wikipedia.org/wiki/The_Alchemist_(novel)", linkLabel:"read The Alchemist" },
+  { word:"CATCH22", tag:"book", type:"satire", hint:"You're trapped by logic itself.", reveal:"Catch-22 describes a paradox where rules prevent escape — a term now used for bureaucratic absurdity.", attr:"Joseph Heller (1961)", link:"https://en.wikipedia.org/wiki/Catch-22", linkLabel:"understand Catch-22" },
+  { word:"FRANKEN", tag:"book", type:"gothic", hint:"The creator fears his creation.", reveal:"Frankenstein explores ambition, isolation, and responsibility in the face of scientific progress.", attr:"Mary Shelley (1818)", link:"https://en.wikipedia.org/wiki/Frankenstein", linkLabel:"read Frankenstein" },
+  { word:"METAMOR", tag:"book", type:"existential", hint:"He woke up as an insect.", reveal:"Kafka's Metamorphosis reflects alienation and identity through surreal transformation.", attr:"Franz Kafka (1915)", link:"https://en.wikipedia.org/wiki/The_Metamorphosis", linkLabel:"read Metamorphosis" },
+  { word:"GRAVITY", tag:"book", type:"postmodern", hint:"A rocket defines everything.", reveal:"Gravity's Rainbow connects paranoia, war, and technology into a fragmented narrative web.", attr:"Thomas Pynchon (1973)", link:"https://en.wikipedia.org/wiki/Gravity%27s_Rainbow", linkLabel:"explore Gravity's Rainbow" },
+  { word:"INFINITE", tag:"book", type:"postmodern", hint:"Entertainment that traps you forever.", reveal:"Infinite Jest explores addiction and media through a film so pleasurable it immobilizes viewers.", attr:"David Foster Wallace (1996)", link:"https://en.wikipedia.org/wiki/Infinite_Jest", linkLabel:"read Infinite Jest" },
+  { word:"OUTLIERS", tag:"book", type:"analysis", hint:"Success isn't what you think.", reveal:"Outliers argues that opportunity and timing matter as much as talent.", attr:"Malcolm Gladwell (2008)", link:"https://en.wikipedia.org/wiki/Outliers_(book)", linkLabel:"explore Outliers" },
+  { word:"HOBBIT", tag:"book", type:"fantasy", hint:"A journey that changes everything.", reveal:"The Hobbit introduces Middle-earth and themes of courage, greed, and transformation.", attr:"J.R.R. Tolkien (1937)", link:"https://en.wikipedia.org/wiki/The_Hobbit", linkLabel:"enter The Hobbit" },
+  { word:"FOG", tag:"phenomenon", type:"natural", hint:"Seeing without seeing.", reveal:"Fog forms when air cools to its dew point, reducing visibility and distorting perception.", attr:"Meteorology", link:"https://en.wikipedia.org/wiki/Fog", linkLabel:"explore fog" },
+  { word:"AURORA", tag:"phenomenon", type:"cosmic", hint:"Lights from solar winds.", reveal:"Auroras occur when charged particles collide with Earth's atmosphere, creating glowing skies.", attr:"Space physics", link:"https://en.wikipedia.org/wiki/Aurora", linkLabel:"see auroras" },
+  { word:"DEJAVU", tag:"phenomenon", type:"cognitive", hint:"You've been here before.", reveal:"Déjà vu may result from mismatched memory processing, giving a false sense of familiarity.", attr:"Cognitive science", link:"https://en.wikipedia.org/wiki/D%C3%A9j%C3%A0_vu", linkLabel:"understand déjà vu" },
+  { word:"FLOW", tag:"phenomenon", type:"psychology", hint:"You lose track of time.", reveal:"Flow is a mental state of deep immersion where performance and satisfaction peak.", attr:"Mihaly Csikszentmihalyi", link:"https://en.wikipedia.org/wiki/Flow_(psychology)", linkLabel:"enter flow" },
+  { word:"PLACEBO", tag:"phenomenon", type:"medical", hint:"Belief changes biology.", reveal:"The placebo effect shows that expectation alone can produce measurable physiological outcomes.", attr:"Medicine", link:"https://en.wikipedia.org/wiki/Placebo", linkLabel:"explore placebo" },
+  { word:"BUTTERFLY", tag:"phenomenon", type:"chaos", hint:"Small changes, massive impact.", reveal:"The butterfly effect describes how tiny initial differences can lead to vastly different outcomes.", attr:"Chaos theory", link:"https://en.wikipedia.org/wiki/Butterfly_effect", linkLabel:"understand chaos" },
+  { word:"SLEEP", tag:"phenomenon", type:"biology", hint:"Why do we lose consciousness daily?", reveal:"Sleep consolidates memory, repairs the body, and regulates emotions — yet its full purpose remains debated.", attr:"Neuroscience", link:"https://en.wikipedia.org/wiki/Sleep", linkLabel:"study sleep" },
+  { word:"LUCID", tag:"phenomenon", type:"dreaming", hint:"Dreaming while aware.", reveal:"Lucid dreaming allows conscious control within dreams, blurring reality and imagination.", attr:"Dream research", link:"https://en.wikipedia.org/wiki/Lucid_dream", linkLabel:"explore lucid dreaming" },
+  { word:"TIME", tag:"phenomenon", type:"concept", hint:"It flows only forward — or does it?", reveal:"Time may be an emergent property rather than a fundamental force, challenging intuitive experience.", attr:"Physics", link:"https://en.wikipedia.org/wiki/Time", linkLabel:"explore time" },
+  { word:"ECHO", tag:"phenomenon", type:"acoustic", hint:"Sound returning to you.", reveal:"Echoes occur when sound waves reflect off surfaces and return after a delay.", attr:"Acoustics", link:"https://en.wikipedia.org/wiki/Echo", linkLabel:"understand echo" },
+  { word:"FIREWHIRL", tag:"phenomenon", type:"extreme", hint:"A tornado made of fire.", reveal:"Fire whirls occur when heat and wind combine to create rotating columns of flame.", attr:"Fire science", link:"https://en.wikipedia.org/wiki/Fire_whirl", linkLabel:"see fire whirl" },
+  { word:"MIRAGE", tag:"phenomenon", type:"optical", hint:"Water that isn't there.", reveal:"Mirages occur when light bends due to temperature differences, creating illusions.", attr:"Optics", link:"https://en.wikipedia.org/wiki/Mirage", linkLabel:"explore mirages" },
+  { word:"SYNESTHESIA", tag:"phenomenon", type:"neurological", hint:"Seeing sounds, tasting colors.", reveal:"Synesthesia links senses, causing cross-perception experiences.", attr:"Neuroscience", link:"https://en.wikipedia.org/wiki/Synesthesia", linkLabel:"understand synesthesia" },
+  { word:"DOPPLER", tag:"phenomenon", type:"physics", hint:"Sound shifts as things move.", reveal:"The Doppler effect explains pitch changes based on motion — used in radar and astronomy.", attr:"Physics", link:"https://en.wikipedia.org/wiki/Doppler_effect", linkLabel:"learn Doppler effect" },
+  { word:"EVEREST", tag:"mountain", type:"extreme", hint:"The highest point humans can stand on.", reveal:"Mount Everest rises 8,848.86 meters above sea level, yet climbing it is more about surviving low oxygen and weather than raw height.", attr:"Himalayas, Nepal–China", link:"https://en.wikipedia.org/wiki/Mount_Everest", linkLabel:"explore Everest" },
+  { word:"K2", tag:"mountain", type:"extreme", hint:"Harder than Everest, deadlier too.", reveal:"K2 has one of the highest fatality rates among major peaks due to unpredictable weather and technical difficulty.", attr:"Karakoram Range", link:"https://en.wikipedia.org/wiki/K2", linkLabel:"explore K2" },
+  { word:"ANNAPURNA", tag:"mountain", type:"extreme", hint:"Beauty with a cost.", reveal:"Annapurna I has historically had one of the highest death-to-summit ratios among 8000m peaks.", attr:"Nepal Himalayas", link:"https://en.wikipedia.org/wiki/Annapurna", linkLabel:"explore Annapurna" },
+  { word:"KAILASH", tag:"mountain", type:"sacred", hint:"No one climbs this peak.", reveal:"Mount Kailash is considered sacred in Hinduism, Buddhism, Jainism, and Bon — climbing it is forbidden.", attr:"Tibet", link:"https://en.wikipedia.org/wiki/Mount_Kailash", linkLabel:"explore Kailash" },
+  { word:"FUJI", tag:"mountain", type:"cultural", hint:"A volcano turned icon.", reveal:"Mount Fuji is both an active volcano and a spiritual symbol deeply embedded in Japanese culture.", attr:"Japan", link:"https://en.wikipedia.org/wiki/Mount_Fuji", linkLabel:"explore Fuji" },
+  { word:"KILIMANJARO", tag:"mountain", type:"volcanic", hint:"Africa's highest peak.", reveal:"Kilimanjaro is a dormant volcano with three cones and shrinking glaciers.", attr:"Tanzania", link:"https://en.wikipedia.org/wiki/Mount_Kilimanjaro", linkLabel:"explore Kilimanjaro" },
+  { word:"ALPS", tag:"mountain", type:"range", hint:"Europe's natural barrier.", reveal:"The Alps span eight countries and have shaped climate, culture, and warfare for centuries.", attr:"Europe", link:"https://en.wikipedia.org/wiki/Alps", linkLabel:"explore the Alps" },
+  { word:"ANDES", tag:"mountain", type:"range", hint:"The longest mountain range.", reveal:"The Andes stretch over 7,000 km along South America's western edge.", attr:"South America", link:"https://en.wikipedia.org/wiki/Andes", linkLabel:"explore the Andes" },
+  { word:"ROCKIES", tag:"mountain", type:"range", hint:"A backbone of North America.", reveal:"The Rocky Mountains influence weather patterns and ecosystems across the continent.", attr:"North America", link:"https://en.wikipedia.org/wiki/Rocky_Mountains", linkLabel:"explore Rockies" },
+  { word:"CAMINO", tag:"trail", type:"pilgrimage", hint:"A walk toward meaning.", reveal:"The Camino de Santiago is a network of pilgrimage routes leading to a shrine in Spain.", attr:"Spain", link:"https://en.wikipedia.org/wiki/Camino_de_Santiago", linkLabel:"walk the Camino" },
+  { word:"MACHUPICCHU", tag:"place", type:"heritage", hint:"A city in the clouds.", reveal:"Machu Picchu was an Incan citadel hidden in the Andes, rediscovered in 1911.", attr:"Peru", link:"https://en.wikipedia.org/wiki/Machu_Picchu", linkLabel:"explore Machu Picchu" },
+  { word:"PETRA", tag:"place", type:"ancient", hint:"A city carved into stone.", reveal:"Petra was the capital of the Nabataean kingdom, known for rock-cut architecture.", attr:"Jordan", link:"https://en.wikipedia.org/wiki/Petra", linkLabel:"explore Petra" },
+  { word:"ANGKOR", tag:"place", type:"ancient", hint:"A lost jungle city.", reveal:"Angkor was the center of the Khmer Empire and includes the famous Angkor Wat temple.", attr:"Cambodia", link:"https://en.wikipedia.org/wiki/Angkor", linkLabel:"explore Angkor" },
+  { word:"VARANASI", tag:"city", type:"spiritual", hint:"One of the oldest living cities.", reveal:"Varanasi has been continuously inhabited for thousands of years and is central to Hindu rituals.", attr:"India", link:"https://en.wikipedia.org/wiki/Varanasi", linkLabel:"explore Varanasi" },
+  { word:"ULURU", tag:"place", type:"sacred", hint:"A rock with deep meaning.", reveal:"Uluru is sacred to Indigenous Australians and carries cultural and spiritual significance.", attr:"Australia", link:"https://en.wikipedia.org/wiki/Uluru", linkLabel:"explore Uluru" },
+  { word:"SAHARA", tag:"place", type:"desert", hint:"A sea of sand.", reveal:"The Sahara is the largest hot desert, with extreme temperature shifts and vast dunes.", attr:"Africa", link:"https://en.wikipedia.org/wiki/Sahara", linkLabel:"explore Sahara" },
+  { word:"GOBI", tag:"place", type:"desert", hint:"Cold, harsh, and vast.", reveal:"The Gobi Desert is known for extreme temperatures and fossil discoveries.", attr:"Mongolia/China", link:"https://en.wikipedia.org/wiki/Gobi_Desert", linkLabel:"explore Gobi" },
+  { word:"AMAZON", tag:"place", type:"ecosystem", hint:"The lungs of Earth.", reveal:"The Amazon rainforest produces significant oxygen and hosts immense biodiversity.", attr:"South America", link:"https://en.wikipedia.org/wiki/Amazon_rainforest", linkLabel:"explore Amazon" },
+  { word:"ANTARCTICA", tag:"place", type:"extreme", hint:"A frozen continent.", reveal:"Antarctica is the coldest, driest, and windiest continent on Earth.", attr:"South Pole", link:"https://en.wikipedia.org/wiki/Antarctica", linkLabel:"explore Antarctica" },
+  { word:"GRANDCANYON", tag:"place", type:"geology", hint:"A timeline carved in rock.", reveal:"The Grand Canyon reveals millions of years of geological history.", attr:"USA", link:"https://en.wikipedia.org/wiki/Grand_Canyon", linkLabel:"explore Grand Canyon" },
+  { word:"GALAPAGOS", tag:"place", type:"ecosystem", hint:"Evolution in isolation.", reveal:"The Galápagos Islands inspired Darwin's theory of evolution.", attr:"Ecuador", link:"https://en.wikipedia.org/wiki/Gal%C3%A1pagos_Islands", linkLabel:"explore Galápagos" },
+  { word:"YELLOWSTONE", tag:"place", type:"geothermal", hint:"A volcano beneath a park.", reveal:"Yellowstone sits atop a supervolcano with geysers and hot springs.", attr:"USA", link:"https://en.wikipedia.org/wiki/Yellowstone_National_Park", linkLabel:"explore Yellowstone" },
+  { word:"BANFF", tag:"place", type:"nature", hint:"Turquoise lakes and peaks.", reveal:"Banff National Park is known for glaciers, lakes, and alpine landscapes.", attr:"Canada", link:"https://en.wikipedia.org/wiki/Banff_National_Park", linkLabel:"explore Banff" },
+  { word:"PATAGONIA", tag:"place", type:"wild", hint:"The edge of the world.", reveal:"Patagonia spans Argentina and Chile, known for glaciers and rugged terrain.", attr:"South America", link:"https://en.wikipedia.org/wiki/Patagonia", linkLabel:"explore Patagonia" },
+  { word:"TORRES", tag:"mountain", type:"iconic", hint:"Spikes of stone in the sky.", reveal:"Torres del Paine features dramatic granite peaks formed by glacial activity.", attr:"Chile", link:"https://en.wikipedia.org/wiki/Torres_del_Paine", linkLabel:"explore Torres del Paine" }
 ];
 
 let WORDS = [], secret, entry, maxRows, stRow, stCol, board, over;
